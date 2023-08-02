@@ -1,4 +1,6 @@
-
+<?php
+         session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,20 +18,27 @@
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-         session_start();
-         if($_SESSION['email'] != null) {
+         
+         if($_SESSION['email'] != null || $_SESSION['email'] != ''){
              if($_SESSION['rol_id']==1){
                  include "./cliente_header.html";
                  include "./cliente_menu.html";
-             }else if($_SESSION['rol_id']==3){
+            }else if($_SESSION['rol_id']==2){
+                    include "./jefecatedra_header.html";
+                    include "./jefecatedra_menu.html";
+            }else if($_SESSION['rol_id']==3){
                  include "./admin_header.html";
                  include "./admin_menu.html";
-             }
+             }else if($_SESSION['rol_id']==4){
+                include "./superadmin_header.html";
+                include "./superadmin_menu.html";
+            }
          }else {
              include "./header.html";
              include "./menu.html";
+
          }
-        
+         include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">FAQs</h2>

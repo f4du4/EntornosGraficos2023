@@ -20,6 +20,7 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Gestion de Postulaciones</h2>
@@ -35,15 +36,17 @@ include "conexion.php";
                     </tr>
                     
                     <?php 
-                    $vQuery = "SELECT postulaciones.id, postulaciones.estado, postulaciones.vacantes_id, postulaciones.usuarios_id FROM postulaciones";
+                    $vQuery = "SELECT postulaciones.id, postulaciones.estado, materias.nombreMat, usuarios.email, 
+                    postulaciones.usuarios_id, postulaciones.vacantes_id FROM postulaciones INNER JOIN vacantes ON vacantes.id = postulaciones.vacantes_id
+                    INNER JOIN materias ON materias.id = vacantes.materia INNER JOIN usuarios ON usuarios.id = postulaciones.usuarios_id";
                     $vResultado = mysqli_query($link,$vQuery);
                     while($row = $vResultado->fetch_array()){
                     ?>
                     <tr class="datosTabla">
                         <td><?php echo $row['id'] ?></td>
                         <td><?php echo $row['estado'] ?></td>
-                        <td><?php echo $row['vacantes_id'] ?></td>
-                        <td><?php echo $row['usuarios_id'] ?></td>
+                        <td><?php echo $row['nombreMat'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
                         <td>
                             <form action="obtener_vacante.php" method="post">
                                 <input type="hidden" name="idvac" readonly value="<?php echo $row['vacantes_id'] ?>">

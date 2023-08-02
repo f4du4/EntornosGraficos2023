@@ -1,3 +1,6 @@
+<?php
+        session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +18,18 @@
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-        session_start();
+        
         include "./cliente_header.html";
         include "./cliente_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
-            <h1 class="text-center p-4 pt-5 titulo">Mis Postulaciones</h2>
+            <h1 class="text-center p-4 pt-3 titulo">Mis Postulaciones</h2>
             <?php 
                 $idCliente = $_SESSION['id'];
                 include "conexion.php";  
-                $vClienteQuery = "SELECT postulaciones.id, postulaciones.estado, vacantes.nombre, vacantes.materia, vacantes.fechaFin 
-                FROM postulaciones INNER JOIN vacantes ON postulaciones.vacantes_id = vacantes.id 
+                $vClienteQuery = "SELECT postulaciones.id, postulaciones.estado, vacantes.nombre, vacantes.fechaFin, materias.nombreMat
+                FROM postulaciones INNER JOIN vacantes ON postulaciones.vacantes_id = vacantes.id INNER JOIN materias ON vacantes.materia = materias.id 
                 WHERE postulaciones.usuarios_id = '$idCliente'"; 
                 $vResultado = mysqli_query($link, $vClienteQuery);
                 $num_rows = mysqli_num_rows($vResultado);
@@ -42,16 +46,11 @@
                         </tr>
                         <?php
                         while($row = $vResultado->fetch_array()){
-                            $idPostulacion = $row['id'];
-                            $puesto = $row['nombre'];
-                            $fechaCierre = $row['fechaFin'];
-                            $materia = $row['materia'];
-                            $estado = $row['estado'];
                         ?>
                         <tr class="datosTabla">
                             <td><?php echo $row['id'] ?></td>
                             <td><?php echo $row['nombre']?></td>
-                            <td><?php echo $row['materia'] ?></td>
+                            <td><?php echo $row['nombreMat'] ?></td>
                             <td><?php echo $row['fechaFin'] ?></td>
                             <td><?php echo $row['estado']?></td>
                         </tr>

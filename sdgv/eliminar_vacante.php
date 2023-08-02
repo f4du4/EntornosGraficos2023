@@ -5,4 +5,5 @@ $vQuery = "DELETE FROM vacantes WHERE vacantes.id = '$id'" ;
 $vResultado = mysqli_query($link,$vQuery);
 mysqli_close($link);
 header("Location: ./lista_vacantes.php");
+die;
 ?>

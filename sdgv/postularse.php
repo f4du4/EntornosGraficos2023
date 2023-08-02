@@ -1,5 +1,6 @@
 <?php
 include "conexion.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,21 +19,23 @@ include "conexion.php";
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-        session_start();
+        
         include "./cliente_header.html";
         include "./cliente_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Postulacion a Vacante</h2>
             <?php 
        
             $id_vacante = $_POST['idvacante'];
-            $vQuery = "SELECT nombre,materia FROM vacantes WHERE vacantes.id LIKE '$id_vacante'";
+            $vQuery = "SELECT vacantes.nombre, materias.nombreMat FROM vacantes 
+            INNER JOIN materias ON vacantes.materia = materias.id WHERE vacantes.id LIKE '$id_vacante'";
             $vResultado = mysqli_query($link, $vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num_rows = mysqli_num_rows($vResultado);
             if($num_rows > 0){
-                $materia = $row['materia'];
+                $materia = $row['nombreMat'];
                 $puesto = $row['nombre'];
                 $id_usuario = $_SESSION['id'];
                 $vUserQuery = "SELECT nombre,apellido,email FROM usuarios WHERE usuarios.id = '$id_usuario'";
@@ -50,13 +53,13 @@ include "conexion.php";
                         Se postula a la vacante de la materia <?php echo $materia?> para el puesto de <?php echo $puesto ?>.
                         <br><br>
                         Si los datos son correctos y desea postularse, <strong>por favor cargue su CV</strong> y envie la postulacion a traves del boton "Enviar".</h3>
-                        <form action="procesar_enviar_postulacion.php" class="d-flex flex-column justify-content-center text-center" method="post">
-                            <input type="file" name="fileToUpload" id="fileToUpload" require>
+                        <form action="procesar_enviar_postulacion.php" class="d-flex flex-column justify-content-center text-center" method="post" enctype="multipart/form-data">
+                            <input type="file" accept="application/pdf" name="pdfFile" id="pdfFile" require>
                             <input type="hidden" value = "<?php echo $id_usuario ?>" name ="iduser">
                             <br>
                             <input type="hidden" value = "<?php echo $id_vacante ?>" name ="idvac">
                             <br><br>
-                            <input type="submit" name="submitenviar" value="Enviar" class="btn btn-success"><br><br>
+                            <input type="submit" name="submitenviar" value="Enviar" class="btn btn-success exito"><br><br>
                         </form>
                         <?php
             }

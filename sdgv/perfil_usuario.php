@@ -1,3 +1,7 @@
+<?php
+include "conexion.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +18,6 @@
 </head>
 <body>
         <?php
-        include "conexion.php";
-        session_start();
         if($_SESSION['rol_id']==1){
             include "./cliente_header.html";
             include "./cliente_menu.html";
@@ -29,13 +31,15 @@
             include "./admin_menu.html";
             $rol = 'admin';
         }
+        include "./breadcrumbs.php";
+        
         $idUser = $_SESSION['id'];
         $vQuery = "SELECT id,nombre,apellido,email,pass FROM usuarios WHERE usuarios.id = '$idUser'";
         $vResultado = mysqli_query($link,$vQuery);
         $row = mysqli_fetch_array($vResultado);
         ?>
     <div class="row d-flex d-flex-row justify-content-center pt-2">
-    <h2 class="text-center p-4 pt-5 titulo">Mi Perfil</h2>
+    <h2 class="text-center p-4 pt-3 titulo">Mi Perfil</h2>
     <table class="tablaVacantes">
         <tr class="tituloTabla">
                 <th>ID</th>
@@ -56,7 +60,7 @@
                 <td>
                     <form action="editar_miperfil.php" method="post">
                             <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                            <input type="submit" class="btn btn-success" value= "Editar" name="submit_miperfil">
+                            <input type="submit" class="btn btn-success exito" value= "Editar" name="submit_miperfil">
                     </form>
                 </td>
         </tr>

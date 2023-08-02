@@ -20,13 +20,16 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         $id = $_POST['idpostu'];
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Usuario asociado a la postulacion <?php echo $id ?></h2>
             <?php 
             $idusuario = $_POST['idusu'];
-            $vQuery = "SELECT * FROM usuarios WHERE usuarios.id = '$idusuario'";
+            $vQuery = "SELECT usuarios.id, usuarios.nombre, usuarios.apellido, usuarios.email,
+            usuarios.pass, roles.descripcion AS rol FROM usuarios INNER JOIN roles ON roles.id = usuarios.rol_id
+            WHERE usuarios.id = '$idusuario'";
             $vResultado = mysqli_query($link,$vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
@@ -49,7 +52,7 @@ include "conexion.php";
                             <td><?php echo $row['apellido'] ?></td>
                             <td><?php echo $row['email'] ?></td>
                             <td><?php echo $row['pass'] ?></td>
-                            <td><?php echo $row['rol_id'] ?></td>
+                            <td><?php echo $row['rol'] ?></td>
                     </tr>
                 </table>
                     <?php

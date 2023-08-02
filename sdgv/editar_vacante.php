@@ -20,17 +20,23 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Modificacion de la Vacante</h2>
             <?php 
         
             $id = $_POST['idvac'];
-            $vQuery = "SELECT * FROM vacantes WHERE vacantes.id = '$id'";
+            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, materias.nombreMat, vacantes.materia
+            FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$id'";
+            $MateriasQuery = "SELECT materias.id, materias.nombreMat FROM materias";
             $vResultado = mysqli_query($link,$vQuery);
+            $vResMat = mysqli_query($link,$MateriasQuery);
             $row = mysqli_fetch_array($vResultado);
+            
             $num = mysqli_num_rows($vResultado);
-            if($num>0){
+            $numMat = mysqli_num_rows($vResMat);
+            if($num>0 && $numMat > 0){
             ?>
             <div class="row d-flex-row justify-content-center pt-2">
                 <form action="procesar_editar_vacante.php" class="d-flex flex-column justify-content-center text-center iniciosesion" method="post">
@@ -49,9 +55,19 @@ include "conexion.php";
                         <input type="text" value = "<?php echo $row['fechaFin'] ?> " name ="fechaFinvacante">
                         <br>
                         <label for="">Materia:</label>
-                        <input type="text" value = "<?php echo $row['materia'] ?> " name ="materiavacante">
+                        <select class="form-control" id="selectItem" name="materiavacante">
+                            <?php 
+                                while($materiasrow = mysqli_fetch_array($vResMat)) {
+                            ?>
+                                <option
+                                <?php if($row['materia'] == $materiasrow['id']) echo 'selected'; ?>
+                                    value="<?php echo $materiasrow['id']; ?>">
+                                    <?php echo $materiasrow['nombreMat']; ?>
+                                </option>
+                                <?php } ?>
+                        </select>
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
                 </form>
                     <?php
             }

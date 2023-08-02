@@ -1,4 +1,7 @@
-
+<?php 
+session_start();
+$_SESSION['email'] = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +21,7 @@
         <?php
         include "./header.html";
         include "./menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h1 class="text-center inicio p-4">¡Bienvendo al Sistema de Gestion de Vacantes de la Universidad Tecnológica Nacional - FRRo!</h1>

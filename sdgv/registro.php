@@ -51,6 +51,7 @@
         <?php
         include "./header.html";
         include "./menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Registro</h2>
@@ -131,7 +132,6 @@
         }
         
         mysqli_close($link);
-        //abrir aca --> http://localhost/sdgv/registro.php
         }
         ?>
         </div>

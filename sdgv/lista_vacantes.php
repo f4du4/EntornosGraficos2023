@@ -20,6 +20,7 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Gestion de Vacantes</h2>
@@ -32,7 +33,8 @@ include "conexion.php";
             <?php if(isset($_POST["submit"])) {
                 include "conexion.php";  
                 $vMateria = $_POST["materia"];
-                $vMateriaQuery = "SELECT id,nombre,fechaFin,materia FROM vacantes WHERE vacantes.materia LIKE '$vMateria'"; 
+                $vMateriaQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id 
+                WHERE materias.nombreMat LIKE '%$vMateria%'"; 
                 $vResultado = mysqli_query($link, $vMateriaQuery);
                 $num_rows = mysqli_num_rows($vResultado);
                 if($num_rows > 0){
@@ -50,7 +52,7 @@ include "conexion.php";
                             $id = $row['id'];
                             $puesto = $row['nombre'];
                             $fechaCierre = $row['fechaFin'];
-                            $materia = $row['materia'];
+                            $materia = $row['nombreMat'];
                         ?>
                         <tr class="datosTabla">
                             <td><?php echo $id ?></td>
@@ -67,7 +69,7 @@ include "conexion.php";
                   
                 }else{
                     ?>
-                    <h2>La materia ingresada no existe</h2>
+                    <h2>La materia ingresada no existe o bien no hay vacantes disponibles</h2>
                     <?php
                 }
             }
@@ -85,7 +87,7 @@ include "conexion.php";
                     </tr>
                     
                     <?php 
-                    $vQuery = "SELECT * FROM vacantes";
+                    $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id";
                     $vResultado = mysqli_query($link,$vQuery);
                     while($row = $vResultado->fetch_array()){
                     ?>
@@ -93,17 +95,17 @@ include "conexion.php";
                         <td><?php echo $row['id'] ?></td>
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['fechaFin'] ?></td>
-                        <td><?php echo $row['materia'] ?></td>
+                        <td><?php echo $row['nombreMat'] ?></td>
                         <td>
                             <form action="editar_vacante.php" method="post">
                                 <input type="hidden" name="idvac" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-success" value= "Editar" name="submiteditar">
+                                <input type="submit" class="btn btn-success exito" value= "Editar" name="submiteditar">
                             </form>
                         </td>
                         <td>
                             <form action="eliminar_vacante.php" method="post">
                                 <input type="hidden" name="idvac" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-danger" value= "Cerrar" name="submiteliminar">
+                                <input type="submit" class="btn btn-danger exito" value= "Cerrar" name="submiteliminar">
                             </form>
                         </td>
                         

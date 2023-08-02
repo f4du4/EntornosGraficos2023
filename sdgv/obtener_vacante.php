@@ -20,13 +20,15 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         $id = $_POST['idpostu'];
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Vacante asociada a la postulacion <?php echo $id ?></h2>
             <?php 
             $idVacante = $_POST['idvac'];
-            $vQuery = "SELECT * FROM vacantes WHERE vacantes.id = '$idVacante'";
+            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, materias.nombreMat
+            FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$idVacante'";
             $vResultado = mysqli_query($link,$vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
@@ -49,7 +51,7 @@ include "conexion.php";
                             <td><?php echo $row['descripcion'] ?></td>
                             <td><?php echo $row['fechaIni'] ?></td>
                             <td><?php echo $row['fechaFin'] ?></td>
-                            <td><?php echo $row['materia'] ?></td>
+                            <td><?php echo $row['nombreMat'] ?></td>
                     </tr>
                 </table>
                     <?php

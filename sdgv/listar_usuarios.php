@@ -20,16 +20,17 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
-            <h1 class="text-center p-4 pt-5 titulo">Gestion de Usuarios</h2>
+            <h1 class="text-center p-4 pt-3 titulo">Gestion de Usuarios</h2>
             <table class="tablaVacantes">
                     <tr class="tituloTabla">
-                    <th>ID</th>
+                    
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
-                    <th>Contraseña</th>
+                    <!--<th>Contraseña</th> -->
                     <th>Rol</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -41,22 +42,22 @@ include "conexion.php";
                     while($row = $vResultado->fetch_array()){
                     ?>
                     <tr class="datosTabla">
-                        <td><?php echo $row['id'] ?></td>
+                        
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['apellido'] ?></td>
                         <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['pass'] ?></td>
+                        <!--al final no muestro contra-->
                         <td><?php echo $row['rol_id'] ?></td>
                         <td>
                             <form action="editar_usuario.php" method="post">
                                 <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-success" value= "Editar" name="submiteditar">
+                                <input type="submit" class="btn btn-success exito" value= "Editar" name="submiteditar">
                             </form>
                         </td>
                         <td>
                             <form action="eliminar_usuario.php" method="post">
                                 <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-danger" value= "Eliminar" name="submiteliminar">
+                                <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
                             </form>
                         </td>
                     </tr>

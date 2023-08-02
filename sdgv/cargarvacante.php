@@ -39,6 +39,7 @@
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Cargar vacante</h2>
@@ -64,8 +65,8 @@
                     <input class="px-3" type="datetime" name="Fin" placeholder="YYYY-MM-DD HH:MM:SS" required>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
-                    <label class="formlabel" for="">Materia:</label>
-                    <input class="px-3" type="text" name="Mat" placeholder="Ej: Analisis Matematico 2"/>
+                    <label class="formlabel" for="">ID Materia:</label>
+                    <input class="px-3" type="number" name="Mat" placeholder="Ej: 7"/>
                 </div>
                 <button type="submit" name="submit" class="mt-3 mb-3 p-2 click boton">CARGAR</button>
             </form>

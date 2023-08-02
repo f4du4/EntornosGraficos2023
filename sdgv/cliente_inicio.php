@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['email'] == null || $_SESSION['email'] = ''){
+if($_SESSION['email'] == null || $_SESSION['email'] == ''){
     header("Location: ./ingreso.php");
     die;
 }
@@ -24,6 +24,7 @@ if($_SESSION['email'] == null || $_SESSION['email'] = ''){
         <?php
         include "./cliente_header.html";
         include "./cliente_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h1 class="text-center inicio p-4">¡Bienvendo al Sistema de Gestion de Vacantes de la Universidad Tecnológica Nacional - FRRo!</h1>

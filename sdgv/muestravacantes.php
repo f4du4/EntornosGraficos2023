@@ -1,6 +1,3 @@
-<?php
-        session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,24 +15,9 @@
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-    
-        if($_SESSION['email'] != null || $_SESSION['email'] != ''){
-            if($_SESSION['rol_id']==1){
-                include "./cliente_header.html";
-                include "./cliente_menu.html";
-           }else if($_SESSION['rol_id']==2){
-                   include "./jefecatedra_header.html";
-                   include "./jefecatedra_menu.html";
-           }else if($_SESSION['rol_id']==3){
-                include "./admin_header.html";
-                include "./admin_menu.html";
-            }else if($_SESSION['rol_id']==4){
-               include "./superadmin_header.html";
-               include "./superadmin_menu.html";
-           }
-        }
-        include "./breadcrumbs.php";
-
+            include "./header.html";
+            include "./menu.html";
+            include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Listado de vacantes abiertas</h2>
@@ -49,28 +31,12 @@
                 $seg = date("s"); //segundos de 00 a 59
                 $hoy = date("Y-m-d H:i:s");
                 include "conexion.php";  
-                $num_pagina = 1;
-                if (isset($_GET['page'])) {
-                    $num_pagina = $_GET['page']; //para saber q pagina de resultados muestro
-                }
-
-                $limite = 2; //items/rows por pagina
-                $inicio = ($num_pagina - 1) * $limite; //limite inicial
-
-                $vQueryTotalRows = "SELECT COUNT(*) as total FROM vacantes WHERE '$hoy' BETWEEN vacantes.fechaIni AND vacantes.fechaFin";
-                $resultadoTotal = mysqli_query($link, $vQueryTotalRows);
-                $rowsTotales = mysqli_fetch_array($resultadoTotal)['total'];
-
-                $totalPaginas = ceil($rowsTotales/$limite);
-
-            
                 $vFechaQuery = "SELECT vacantes.fechaFin, vacantes.fechaIni, vacantes.id, vacantes.nombre,
                 materias.nombreMat, vacantes.om_data FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id
-                WHERE '$hoy' BETWEEN vacantes.fechaIni AND vacantes.fechaFin LIMIT $inicio, $limite";
+                 WHERE '$hoy' BETWEEN vacantes.fechaIni AND vacantes.fechaFin"; 
                 $vResultado = mysqli_query($link, $vFechaQuery);
                 $num_rows = mysqli_num_rows($vResultado);
-
-                if($num_rows > 0 && $rowsTotales>0){
+                if($num_rows > 0){
                     ?>
                     <br><br>
                     <table class="tablaVacantes">
@@ -80,7 +46,6 @@
                             <th>Cierre vacante</th>
                             <th>Materia</th>
                             <th>Orden de Merito</th>
-                            <th>Accion</th>
                         </tr>
                         <?php
                         while($row = $vResultado->fetch_array()){
@@ -95,51 +60,16 @@
                             <td><?php echo $row['nombre'] ?></td>
                             <td><?php echo $row['fechaFin'] ?></td>
                             <td><?php echo $row['nombreMat'] ?></td>
-                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
-                            <td>
-                                <form action="postularse.php" method="post">
-                                    <input type="hidden" name="idvacante" readonly value="<?php echo $row['id'] ?>">
-                                    <input type="submit" class="btn btn-success exito" value= "Postular" name="submitvacante">
-                                </form>
-                            </td>
+                            <td><button onclick="descargarArchivo()">Descargar pdf</button></td>
                         </tr>
                         <?php
                     }
                     ?>
                     </table>
                     <br><br>
-                    
                      <?php
-                  // Generate pagination links (show only a few buttons)
-                    echo '<ul class="pagination justify-content-center lead">';
-                    if ($num_pagina > 1) {
-                        echo '<li class="page-item"><a class="page-link item-paginacion" href="vacantesabiertas.php?page=' . ($num_pagina - 1) . '">Previous</a></li>';
-                    }
-
-                    if ($num_pagina > 2) {
-                        echo '<li class="page-item"><a class="page-link item-paginacion" href="vacantesabiertas.php?page=1">1</a></li>';
-                        if ($num_pagina > 3) {
-                            echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                        }
-                    }
-
-                    // Show current page and the next two pages
-                    for ($i = max(1, $num_pagina - 1); $i <= min($num_pagina + 2, $totalPaginas); $i++) {
-                        $activeClass = ($i == $num_pagina) ? 'active' : '';
-                        echo '<li class="page-item ' . $activeClass . '"><a class="page-link item-paginacion" href="vacantesabiertas.php?page=' . $i . '">' . $i . '</a></li>';
-                    }
-
-                    if ($num_pagina < $totalPaginas - 2) {
-                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                        echo '<li class="page-item"><a class="page-link item-paginacion" href="vacantesabiertas.php?page=' . $totalPaginas . '">' . $totalPaginas . '</a></li>';
-                    }
-
-                    if ($num_pagina < $totalPaginas) {
-                        echo '<li class="page-item"><a class="page-link item-paginacion" href="vacantesabiertas.php?page=' . ($num_pagina + 1) . '">Next</a></li>';
-                    }
-                    echo '</ul>';
+                  
                 }else{
-
                     ?>
                     <h2>Actualmente no hay vacantes abiertas.</h2>
                     <?php

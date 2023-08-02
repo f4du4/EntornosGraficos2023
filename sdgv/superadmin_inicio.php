@@ -22,9 +22,8 @@ if($_SESSION['email'] == null || $_SESSION['email'] == ''){
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-        include "./admin_header.html";
-        include "./admin_menu.html";
-        include "./breadcrumbs.php";
+        include "./superadmin_header.html";
+        include "./superadmin_menu.html";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h1 class="text-center inicio p-4">¡Bienvendo al Sistema de Gestion de Vacantes de la Universidad Tecnológica Nacional - FRRo!</h1>

@@ -1,3 +1,6 @@
+<?php
+        session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,20 +18,26 @@
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
-        session_start();
-        if($_SESSION['email'] != '') {
+        
+        if($_SESSION['email'] != null || $_SESSION['email'] != ''){
             if($_SESSION['rol_id']==1){
                 include "./cliente_header.html";
                 include "./cliente_menu.html";
-            }else if($_SESSION['rol_id']==3){
+           }else if($_SESSION['rol_id']==2){
+                   include "./jefecatedra_header.html";
+                   include "./jefecatedra_menu.html";
+           }else if($_SESSION['rol_id']==3){
                 include "./admin_header.html";
                 include "./admin_menu.html";
-            }
+            }else if($_SESSION['rol_id']==4){
+               include "./superadmin_header.html";
+               include "./superadmin_menu.html";
+           }
         }else {
             include "./header.html";
             include "./menu.html";
         }
-
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Buscador de Vacantes</h2>
@@ -39,7 +48,12 @@
             <?php if(isset($_POST["submit"])) {
                 include "conexion.php";  
                 $vMateria = $_POST["materia"];
-                $vMateriaQuery = "SELECT id,nombre,fechaFin,materia FROM vacantes WHERE vacantes.materia LIKE '$vMateria'"; 
+                if ($vMateria == '' || $vMateria == null) {
+                    $vMateriaQuery = 'SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id';
+                } else {
+                    $vMateriaQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes 
+                INNER JOIN materias ON vacantes.materia = materias.id WHERE materias.nombreMat LIKE '%$vMateria%'"; 
+                }
                 $vResultado = mysqli_query($link, $vMateriaQuery);
                 $num_rows = mysqli_num_rows($vResultado);
                 if($num_rows > 0){
@@ -49,21 +63,25 @@
                         <tr class="tituloTabla">
                             <th>ID</th>
                             <th>Puesto</th>
-                            <th>Fecha y Hora de Cierre</th>
+                            <th>Cierre</th>
                             <th>Materia</th>
+                            <th>Orden de Merito</th>
                         </tr>
                         <?php
                         while($row = $vResultado->fetch_array()){
                             $id = $row['id'];
                             $puesto = $row['nombre'];
                             $fechaCierre = $row['fechaFin'];
-                            $materia = $row['materia'];
+                            $materia = $row['nombreMat'];
+                            
+                            $url = "descargar_orden_pdf.php?id=" . urlencode($id);
                         ?>
                         <tr class="datosTabla">
                             <td><?php echo $id ?></td>
                             <td><?php echo $puesto ?></td>
                             <td><?php echo $fechaCierre ?></td>
                             <td><?php echo $materia ?></td>
+                            <td><button onclick="descargarArchivo()">Descargar pdf</button></td>
                         </tr>
                         <?php
                     }
@@ -74,7 +92,7 @@
                   
                 }else{
                     ?>
-                    <h2>La materia ingresada no existe</h2>
+                    <h2>La materia ingresada no existe o bien no hay vacantes abiertas</h2>
                     <?php
                 }
             }
@@ -86,4 +104,5 @@
         ?>
     </div>
 </body>
+
 </html>

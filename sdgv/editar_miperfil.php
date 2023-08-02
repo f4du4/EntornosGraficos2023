@@ -33,6 +33,7 @@ include "conexion.php";
             include "./admin_menu.html";
             $rol = 'admin';
        }
+       include "breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Editar mi perfil</h2>
@@ -60,7 +61,7 @@ include "conexion.php";
                         <label for="">Contraseña:</label>
                         <input type="text" value = "<?php echo $row['pass'] ?> " name ="passuser">
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
                 </form> 
                     <?php
             }

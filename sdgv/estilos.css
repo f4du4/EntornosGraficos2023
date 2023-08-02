@@ -3,7 +3,10 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
-
+body.mensajemail{
+    background-color: #27775c;
+    color:#fafafa;
+}
 .click:hover{
     background-color: #223953;
 }
@@ -129,7 +132,10 @@ label.formlabel{
 p.descripcion{
     font-weight: 700;
 }
-
+p.quienessomos{
+    font-weight: 300;
+    font-size: 1.6vw;
+}
 .footer{
     background-color: #49617c;
     color: #fafafa;
@@ -215,12 +221,13 @@ img.mapasitio{
     width: 70%;
 }
 
+
 p.introfaqs{
     font-size: 1.7vw;
     width: 70%;
     justify-content: center;
     text-align: justify;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 p.questionfaqs{
@@ -310,6 +317,28 @@ input::placeholder{
     font-size: 18px;
 }
 
+.item-paginacion {
+    background-color: #3b5f87;
+    color: #fafafa;
+}
+
+.page-item.active a.item-paginacion {
+    border-color: #fafafa;
+    color: #3b5f87;
+    background-color: #fafafa;
+}
+
+button.descargarpdf{
+    background-color: #eef6ff;
+    border-style: none;
+    box-shadow: none;
+}
+
+input.exito{
+    width: 100px;
+    font-size: 1.4vw;
+}
+
 @media (max-width: 720px){
     div.header{
         font-size: 20px; 
@@ -384,7 +413,30 @@ input::placeholder{
         border-color: #49617c;
         height: 30px;
     }
+    p.introfaqs{
+        font-size: 16px;
+        width: 80%;
+        font-weight: 700;
+
+    }
     
+    p.questionfaqs{
+        font-size: 16px;
+
+    }
+    p.answerfaqs{
+        font-size: 16px;
+    }
+    
+    p.quienessomos{
+        font-weight: 300;
+        font-size: 16px;
+    }
+    
+    input.exito{
+        width: 70px;
+        font-size: 13px;
+    }
 }
 
 @media(max-width:550px){
@@ -427,6 +479,25 @@ input::placeholder{
         font-size: 14px;
     }
 
+    p.introfaqs{
+        font-size: 14px;
+
+    }
+    
+    p.questionfaqs{
+        font-size: 14px;
+        width: 95%;
+    }
+    p.answerfaqs{
+        font-size: 14px;
+        width: 95%;
+    }
+    input.exito{
+        width: 60px;
+        font-size: 10px;
+    }
+    
+
 }
 
 @media (max-width: 450px){
@@ -446,8 +517,8 @@ input::placeholder{
     }
     
     h2{
-        font-size: 16px;
-        padding-top: 15px;
+        font-size: 14px;
+        padding-top: 5px;
     }
 
     form.iniciosesion{
@@ -521,6 +592,10 @@ input::placeholder{
     
     tr.datosTabla{
         font-size: 12px;
+    }
+    input.exito{
+        width: 52px;
+        font-size: 10px;
     }
 
 

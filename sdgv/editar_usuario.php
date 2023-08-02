@@ -20,6 +20,7 @@ include "conexion.php";
         <?php
         include "./admin_header.html";
         include "./admin_menu.html";
+        include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-5 titulo">Modificacion del Usuario</h2>
@@ -45,13 +46,13 @@ include "conexion.php";
                         <label for="">Email:</label>
                         <input type="text" value = "<?php echo $row['email'] ?>" name ="emailuser">
                         <br>
-                        <label for="">Contraseña:</label>
-                        <input type="text" value = "<?php echo $row['pass'] ?> " name ="passuser">
-                        <br>
+                        <!--<label for="">Contraseña:</label>
+                        <input type="text" value = "<?php //echo $row['pass'] ?> " name ="passuser">
+                        <br> -->
                         <label for="">Rol:</label>
                         <input type="text" value = "<?php echo $row['rol_id'] ?> " name ="roliduser">
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
                 </form> 
                     <?php
             }
