@@ -54,7 +54,7 @@
         include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
-            <h2 class="text-center p-4 pt-5 titulo">Registro</h2>
+            <h2 class="text-center p-4 pt-3 titulo">Registro</h2>
             <p class="text-center descripcion">¿Ya estas registrado? <a href="./ingreso.php">Iniciar Sesion</a></p>
             <p class="text-center descripcion">Completa los siguientes datos para registrarte</p>
             <form method="POST" class="d-flex flex-column iniciosesion">
@@ -122,10 +122,8 @@
                                 // creo otra query para insertar el usuario en la bd y le paso tmb el rolId q busque previamente.
                                 $addUserQuery = "INSERT INTO usuarios(nombre, apellido, email, pass, rol_id) values('$vNom','$vApe', '$vMail', '$vContra', $row[0])";
                                 mysqli_query($link, $addUserQuery) or die (mysqli_error($link));
+                                echo "<script>location.href='aprobacion_registro.php';</script>";
                                 
-                                ?>
-                                <h2 class="correctoBackend">¡Fuiste Registrado Exitosamente! <br><br><a href="./ingreso.php" class="btn btn-light">Iniciar Sesion</a></h2>
-                                <?php
                             }
                         }
                 }

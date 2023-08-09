@@ -61,7 +61,7 @@ include "conexion.php";
                         <label for="">Contraseña:</label>
                         <input type="text" value = "<?php echo $row['pass'] ?> " name ="passuser">
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
                 </form> 
                     <?php
             }

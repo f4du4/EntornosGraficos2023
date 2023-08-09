@@ -18,6 +18,5 @@ if(isset($_POST['submitcargar'])){
     }
     mysqli_close($link);
     header("Location: ./cargar_orden_merito.php"); 
-    die;
     }
     ?>

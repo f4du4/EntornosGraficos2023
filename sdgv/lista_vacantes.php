@@ -69,7 +69,7 @@ include "conexion.php";
                   
                 }else{
                     ?>
-                    <h2>La materia ingresada no existe o bien no hay vacantes disponibles</h2>
+                    <h2 class="p-3 text-center justify-content-center">La materia ingresada no existe o bien no hay vacantes disponibles</h2><br>
                     <?php
                 }
             }
@@ -105,7 +105,7 @@ include "conexion.php";
                         <td>
                             <form action="eliminar_vacante.php" method="post">
                                 <input type="hidden" name="idvac" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-danger exito" value= "Cerrar" name="submiteliminar">
+                                <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
                             </form>
                         </td>
                         

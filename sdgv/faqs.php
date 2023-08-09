@@ -19,7 +19,7 @@
     <div class="container-fluid d-flex-row m-0">
         <?php
          
-         if($_SESSION['email'] != null || $_SESSION['email'] != ''){
+         if($_SESSION['email'] != null && $_SESSION['email'] != ''){
              if($_SESSION['rol_id']==1){
                  include "./cliente_header.html";
                  include "./cliente_menu.html";
@@ -41,7 +41,7 @@
          include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
-            <h2 class="text-center p-4 pt-5 titulo">FAQs</h2>
+            <h2 class="text-center p-4 pt-3 titulo">FAQs</h2>
             <p class="introfaqs p-3">En esta seccion se presentan las 
                 respuestas a algunas preguntas frecuentes que pueden tener quienes desean postularse a 
                 una/s vacante/s:</p>
@@ -80,7 +80,7 @@
             </p>
             <p class="questionfaqs px-5">6. ¿Puedo modificar mis datos? Por ejemplo, si cambio de email, o la contraseña, u otro.</p>
             <p class="answerfaqs fw-normal px-5">Si, una vez logueado, en cualquier momento puede cambiar sus datos personales 
-                lo puede hacer a traves de la seccion "Mi Perfil" que se encuentra dentro de la opción "Ingresar" del menú. <br></p>
+                lo puede hacer a traves de la seccion "Mi Perfil" que se encuentra dentro de la opción "Perfil" del menú. <br></p>
         </div>
         <?php
         include "./footer.html";

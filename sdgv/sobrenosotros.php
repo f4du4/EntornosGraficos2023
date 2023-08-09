@@ -19,7 +19,7 @@
     <div class="container-fluid d-flex-row m-0">
         <?php
         
-        if($_SESSION['email'] != null) {
+        if($_SESSION['email'] != null && $_SESSION['email'] !='') {
             if($_SESSION['rol_id']==1){
                 include "./cliente_header.html";
                 include "./cliente_menu.html";

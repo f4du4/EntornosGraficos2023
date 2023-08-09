@@ -60,7 +60,7 @@
                             <td><?php echo $row['nombre'] ?></td>
                             <td><?php echo $row['fechaFin'] ?></td>
                             <td><?php echo $row['nombreMat'] ?></td>
-                            <td><button onclick="descargarArchivo()">Descargar pdf</button></td>
+                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
                         </tr>
                         <?php
                     }

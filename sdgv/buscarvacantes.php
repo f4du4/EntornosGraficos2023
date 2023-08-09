@@ -19,7 +19,7 @@
     <div class="container-fluid d-flex-row m-0">
         <?php
         
-        if($_SESSION['email'] != null || $_SESSION['email'] != ''){
+        if($_SESSION['email'] != null && $_SESSION['email'] != ''){
             if($_SESSION['rol_id']==1){
                 include "./cliente_header.html";
                 include "./cliente_menu.html";
@@ -40,7 +40,7 @@
         include "./breadcrumbs.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
-            <h1 class="text-center p-4 pt-5 titulo">Buscador de Vacantes</h2>
+            <h1 class="text-center p-4 pt-3 titulo">Buscador de Vacantes</h2>
             <form class="text-center justify-content-center p-4 buscador" method="post">
                 <input class="busqueda me-2 px-3" name="materia" type="text" placeholder="  Ingrese su busqueda...">
                 <button type="submit" name="submit" class="mt-4 mb-5 p-2 click botonBusqueda">BUSCAR</button>
@@ -81,7 +81,7 @@
                             <td><?php echo $puesto ?></td>
                             <td><?php echo $fechaCierre ?></td>
                             <td><?php echo $materia ?></td>
-                            <td><button onclick="descargarArchivo()">Descargar pdf</button></td>
+                            <td><button onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
                         </tr>
                         <?php
                     }
@@ -92,7 +92,7 @@
                   
                 }else{
                     ?>
-                    <h2>La materia ingresada no existe o bien no hay vacantes abiertas</h2>
+                    <h2 class="text-center justify-content-center p-3">La materia ingresada no existe o bien no hay vacantes abiertas</h2>
                     <?php
                 }
             }

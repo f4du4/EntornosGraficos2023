@@ -3,10 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
-body.mensajemail{
-    background-color: #27775c;
-    color:#fafafa;
-}
+
 .click:hover{
     background-color: #223953;
 }
@@ -64,6 +61,7 @@ li.menulink:hover ul.dropdownmenu{
     left:0;
     top:100%;
     list-style:none;
+    
 }
 
 div.header{
@@ -75,7 +73,7 @@ p.subtitulo{
     font-size: 2.5vw;
 }
 
-div.menunav{
+.menunav{
     background-color:#fafafa; 
     box-shadow: 3px 3px 3px 1px rgb(133, 133, 133);
     display: flex;
@@ -125,7 +123,7 @@ label.formlabel{
     font-weight: 700; 
     border-style: none;
     font-size: 1.4vw;
-    box-shadow: 0px 2px 4px 2px rgba(41, 41, 41, 0.493);
+    box-shadow: 0 2px 4px 2px rgba(41, 41, 41, 0.493);
 }
 
 
@@ -253,12 +251,12 @@ input.busqueda{
 }
 
 
-div.buscador{
+.buscador{
     flex-direction: row;
     display: inline-block;
 }
 
-table.resultadoBusqueda{
+.resultadoBusqueda{
     width: 80%;
     justify-content: center;
     text-align: center;
@@ -266,7 +264,7 @@ table.resultadoBusqueda{
     border-color: #223953;
 }
 
-table.tablaVacantes{
+.tablaVacantes{
     width: 90%;
     border: 1px solid rgb(41, 41, 41);
     margin-bottom: 20px;
@@ -305,10 +303,9 @@ tr.datosTabla:hover{
     color: rgba(41, 41, 41, 0.8);
 }
 
-div.tablaBusqueda{
+.tablaBusqueda{
     width: 70%;
     justify-content: center;
-    text-align:justify;
     padding-left: 20%;
     text-align: center;
 }
@@ -328,7 +325,7 @@ input::placeholder{
     background-color: #fafafa;
 }
 
-button.descargarpdf{
+.descargarpdf{
     background-color: #eef6ff;
     border-style: none;
     box-shadow: none;
@@ -357,6 +354,18 @@ input.exito{
     
     h2{
         font-size: 20px;
+    }
+    
+    ul li.menulink ul.dropdownmenu li{
+    
+    width: 130px;
+    
+
+    }
+
+    .dropdownmenu li a{
+        font-size: 14px;
+        padding: 8px;
     }
 
     form.iniciosesion{
@@ -388,7 +397,7 @@ input.exito{
     div.formdiv{
         flex-direction: column;
         justify-content: center;
-        text-align:start;
+        text-align:left;
 
     }
 
@@ -455,6 +464,17 @@ input.exito{
     h1.inicio{
         font-size: 25px;
     }
+    
+    ul li.menulink ul.dropdownmenu li{
+    width: 100px;
+
+    }
+
+    .dropdownmenu li a{
+        font-size: 10px;
+        padding: 8px;
+    }
+
 
     input.busqueda{
         border-radius: 20px;
@@ -500,7 +520,7 @@ input.exito{
 
 }
 
-@media (max-width: 450px){
+@media (max-width: 470px){
     div.header{
         font-size: 18px; 
         text-align: center;
@@ -519,6 +539,19 @@ input.exito{
     h2{
         font-size: 14px;
         padding-top: 5px;
+    }
+    
+    ul li.menulink ul.dropdownmenu li{
+   
+    width: 90px;
+    font-weight: 300;
+
+    }
+    .dropdownmenu li a{
+        font-size: 10px;
+        padding: 4px;
+        font-weight: 300;
+        
     }
 
     form.iniciosesion{
@@ -546,7 +579,7 @@ input.exito{
     div.formdiv{
         flex-direction: column;
         justify-content: center;
-        text-align:start;
+        text-align:left;
 
     }
 
@@ -582,7 +615,7 @@ input.exito{
     }
     
     #password-icon{
-        margin-top: 9%;
+        margin-top: 10%;
         margin-right: 2%; 
     }
 
@@ -594,8 +627,8 @@ input.exito{
         font-size: 12px;
     }
     input.exito{
-        width: 52px;
-        font-size: 10px;
+        width: 60px;
+        font-size: 8px;
     }
 
 
@@ -647,7 +680,7 @@ input.exito{
     div.formdiv{
         flex-direction: column;
         justify-content: center;
-        text-align:start;
+        text-align:left;
 
     }
 
@@ -662,5 +695,13 @@ input.exito{
     input::placeholder{
         font-size: 10px;
     }
-
+        #password-icon{
+        margin-top: 8%;
+        margin-right: 2%; 
+    }
+    input.exito{
+        margin: 6px;
+        width: 60px;
+        font-size: 10px;
+    }
 }

@@ -67,7 +67,7 @@ include "conexion.php";
                                 <?php } ?>
                         </select>
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
                 </form>
                     <?php
             }

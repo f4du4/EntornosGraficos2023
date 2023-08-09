@@ -43,16 +43,16 @@ include "conexion.php";
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
-                            <th>Contraseña</th>
                             <th>Rol</th>
+                            <th>CV</th>
                     </tr>
                     <tr class="datosTabla">
                             <td><?php echo $row['id'] ?></td>
                             <td><?php echo $row['nombre'] ?></td>
                             <td><?php echo $row['apellido'] ?></td>
                             <td><?php echo $row['email'] ?></td>
-                            <td><?php echo $row['pass'] ?></td>
                             <td><?php echo $row['rol'] ?></td>
+                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
                     </tr>
                 </table>
                     <?php
@@ -66,4 +66,38 @@ include "conexion.php";
         ?>
     </div>
 </body>
+    <script>
+      function descargarArchivo() {
+
+        // API endpoint to fetch the PDF data
+        const id = '<?php echo $id ?>'; //ID DE LA POSTULACION
+        console.log(id);
+        const apiUrl = `descargar_pdf.php?id=${id}`;
+  
+        // Fetch the PDF data using the API
+        fetch(apiUrl)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            // Decode the Base64 data to a binary PDF
+            const pdfData = atob(data.pdfData);
+  
+            // Create a Blob object from the binary PDF data
+            const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], { type: 'application/pdf' });
+  
+            // Create a temporary URL for the Blob
+            const blobUrl = URL.createObjectURL(blob);
+  
+            // Create a link to download the PDF
+            const downloadLink = document.createElement('a');
+            downloadLink.href = blobUrl;
+            downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
+            downloadLink.click();
+            // Clean up by revoking the Blob URL
+            URL.revokeObjectURL(blobUrl);
+          })
+          .catch(error => console.error('Error fetching PDF:', error));
+      }
+    </script>
 </html>

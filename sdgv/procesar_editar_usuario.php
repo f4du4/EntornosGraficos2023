@@ -10,7 +10,7 @@ $email = $_POST['emailuser'];
 $rol = $_POST['roliduser'];
 
 $vQuery = "UPDATE usuarios SET usuarios.nombre = '$nom', usuarios.apellido = '$ape',
-usuarios.email = '$email', usuarios.pass = '$pass', usuarios.rol_id = '$rol' WHERE usuarios.id = '$id'";
+usuarios.email = '$email', usuarios.rol_id = '$rol' WHERE usuarios.id = '$id'";
 $vResultado = mysqli_query($link,$vQuery);
 
 mysqli_close($link);

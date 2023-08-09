@@ -25,10 +25,10 @@ include "conexion.php";
     
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
-            <h2 class="text-center p-4 pt-5 titulo">Postulaciones asociadas a la materia <?php echo $idMateria ?></h2>
+            <h2 class="text-center p-4 pt-3 titulo">Postulaciones asociadas a la materia <?php echo $idMateria ?></h2>
             <?php 
-            $vQuery = "SELECT vacantes.nombre, vacantes.fechaFin, postulaciones.usuarios_id, postulaciones.id FROM vacantes INNER JOIN postulaciones ON 
-            vacantes.id = postulaciones.vacantes_id WHERE vacantes.materia = '$idMateria' AND postulaciones.estado != 'Rechazada'"; //ACA TENDRIA Q TRAER EL CV!PARA q se lo deje ver en la tabla
+            $vQuery = "SELECT vacantes.nombre, vacantes.fechaFin, vacantes.id as vacanteId, postulaciones.usuarios_id, postulaciones.id, materias.nombreMat FROM vacantes INNER JOIN postulaciones ON 
+            vacantes.id = postulaciones.vacantes_id INNER JOIN materias ON vacantes.materia = materias.id WHERE vacantes.materia = '$idMateria' AND postulaciones.estado != 'Rechazada'"; //ACA TENDRIA Q TRAER EL CV!PARA q se lo deje ver en la tabla
             $vResultado = mysqli_query($link,$vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
@@ -36,11 +36,14 @@ include "conexion.php";
             if($num>0){
                 $id = $row['id'];
                 $url = "descargar_pdf.php?id=" . urlencode($id);
-                $vQueryUser = "SELECT usuarios.email, usuarios.id, postulaciones.estado 
-                FROM usuarios INNER JOIN postulaciones ON postulaciones.usuarios_id = usuarios.id";
+                $idVac = $row['vacanteId'];
+                $vQueryUser = "SELECT usuarios.email, usuarios.id, postulaciones.estado, postulaciones.puntaje 
+                FROM usuarios INNER JOIN postulaciones ON postulaciones.usuarios_id = usuarios.id WHERE 
+                postulaciones.vacantes_id = $idVac";
                 $vResultUser = mysqli_query($link, $vQueryUser);
                 $num_user = mysqli_num_rows($vResultUser);
-                $user = mysqli_fetch_array($vResultUser);
+                
+                //$user = mysqli_fetch_array($vResultUser);
                 if($num_user>0){
             ?> 
             <div class="row d-flex-row justify-content-center pt-2">
@@ -50,12 +53,48 @@ include "conexion.php";
                             <th>Puesto</th>
                             <th>Postulante</th>
                             <th>CV</th>
+                            <th>Puntaje</th>
+                            <th>Notificar Ganador</th>
                     </tr>
+                    <?php
+                    while($user = $vResultUser->fetch_array()){
+                    ?>
                     <tr class="datosTabla">
                             <td><?php echo $row['nombre'] ?></td>
                             <td><?php echo $user['email'] ?></td>
-                            <td><button onclick="descargarArchivo()">Descargar</button></td>
+                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <td>
+                                <?php
+                                if($user['puntaje'] != '0' && $user['puntaje'] != null){
+                                    echo $user['puntaje'];
+                                    
+                                }else{
+                                    ?>
+                                    <form action="carga_puntaje_postu.php" method="post">
+                                        <input type="hidden" name="idPostu" readonly value="<?php echo $row['id'] ?>">
+                                        <input type="submit" name="submitPostu" value="Cargar" class="btn btn-success exito">
+                                    </form>
+                                    <?php
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <form action="enviar_mail_postu.php" method="post">
+                                    <input type="hidden" name="idPostu" readonly value="<?php echo $row['id'] ?>">
+                                    <input type="hidden" name="idVac" readonly value="<?php echo $row['vacanteId'] ?>">
+                                    <input type="hidden" name="emailUser" readonly value="<?php echo $user['email'] ?>">
+                                    <input type="hidden" name="idUser" readonly value="<?php echo $user['id'] ?>">
+                                    <input type="hidden" name="materia" readonly value="<?php echo $row['nombreMat'] ?>">
+                                    <input type="hidden" name="puesto" readonly value="<?php echo $row['nombre'] ?>">
+                                    <input type="hidden" name="nombreUser" readonly value="<?php echo $user['nombre'] ?>">
+                                    <input type="hidden" name="apellidoUser" readonly value="<?php echo $user['apellido'] ?>">
+                                    <button class="descargarpdf" name="submitEmail"><i class="bi bi-envelope-at"></i></button>
+                                </form>
+                            </td>
                     </tr>
+                    <?php
+                    }
+                    ?>
                 </table>
                     <?php
             }else{ ?><h3>No hay postulantes aun</h3><?php }

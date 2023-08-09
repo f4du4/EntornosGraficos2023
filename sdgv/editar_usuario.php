@@ -32,6 +32,9 @@ include "conexion.php";
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
             if($num>0){
+                $vRolesQuery = "SELECT * FROM roles";
+                $vRolesResultado = mysqli_query($link,$vRolesQuery);
+                $numRol = mysqli_num_rows($vRolesResultado);
             ?>
             <div class="row d-flex-row justify-content-center pt-2">
                 <form action="procesar_editar_usuario.php" class="d-flex flex-column justify-content-center text-center iniciosesion" method="post">
@@ -46,13 +49,20 @@ include "conexion.php";
                         <label for="">Email:</label>
                         <input type="text" value = "<?php echo $row['email'] ?>" name ="emailuser">
                         <br>
-                        <!--<label for="">Contraseña:</label>
-                        <input type="text" value = "<?php //echo $row['pass'] ?> " name ="passuser">
-                        <br> -->
                         <label for="">Rol:</label>
-                        <input type="text" value = "<?php echo $row['rol_id'] ?> " name ="roliduser">
+                        <select class="form-control" id="selectItem" name="roliduser">
+                            <?php 
+                                while($rowRol = mysqli_fetch_array($vRolesResultado)) {
+                            ?>
+                                <option
+                                <?php if($row['rol_id'] == $rowRol['id']) echo 'selected'; ?>
+                                    value="<?php echo $rowRol['id']; ?>">
+                                    <?php echo $rowRol['descripcion']; ?>
+                                </option>
+                                <?php } ?>
+                        </select>
                         <br><br>
-                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success exito"> <br><br>
+                        <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br><br>
                 </form> 
                     <?php
             }

@@ -1,5 +1,6 @@
 <?php
 include "conexion.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,8 @@ include "conexion.php";
                     </tr>
                     
                     <?php 
-                    $vQuery = "SELECT * FROM usuarios";
+                    $vQuery = "SELECT usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.rol_id, roles.descripcion FROM usuarios
+                     INNER JOIN roles ON usuarios.rol_id = roles.id";
                     $vResultado = mysqli_query($link,$vQuery);
                     while($row = $vResultado->fetch_array()){
                     ?>
@@ -47,7 +49,7 @@ include "conexion.php";
                         <td><?php echo $row['apellido'] ?></td>
                         <td><?php echo $row['email'] ?></td>
                         <!--al final no muestro contra-->
-                        <td><?php echo $row['rol_id'] ?></td>
+                        <td><?php echo $row['descripcion'] ?></td>
                         <td>
                             <form action="editar_usuario.php" method="post">
                                 <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
@@ -55,10 +57,31 @@ include "conexion.php";
                             </form>
                         </td>
                         <td>
-                            <form action="eliminar_usuario.php" method="post">
-                                <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
-                            </form>
+                            <?php
+                            if($_SESSION['rol_id']==3){  //usuario admin no puede eliminar a otros admin
+                                if($row['rol_id']!=3 && $row['rol_id']!=4){
+                                ?>
+                                <form action="eliminar_usuario.php" method="post">
+                                    <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
+                                    <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
+                                </form>
+                                <?php
+                                }else{
+                                    ?>
+                                    <form method="post">
+                                        <input type="submit" class="btn btn-secondary exito" disabled value= "Eliminar" name="submiteliminar">
+                                    </form>
+                                    <?php
+                                }
+                            }else if($_SESSION['rol_id']==4){ //usuario superadmin si puede eliminar a los admin
+                                ?>
+                                <form action="eliminar_usuario.php" method="post">
+                                    <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
+                                    <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
+                                </form>
+                                <?php
+                            }
+                            ?>
                         </td>
                     </tr>
                     <?php

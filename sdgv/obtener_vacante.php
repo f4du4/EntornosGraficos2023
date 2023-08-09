@@ -27,7 +27,7 @@ include "conexion.php";
             <h2 class="text-center p-4 pt-5 titulo">Vacante asociada a la postulacion <?php echo $id ?></h2>
             <?php 
             $idVacante = $_POST['idvac'];
-            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, materias.nombreMat
+            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, vacantes.om_data, materias.nombreMat
             FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$idVacante'";
             $vResultado = mysqli_query($link,$vQuery);
             $row = mysqli_fetch_array($vResultado);
@@ -44,6 +44,7 @@ include "conexion.php";
                             <th>Fecha Inicio</th>
                             <th>Fecha Cierre</th>
                             <th>Materia</th>
+                            <th>Orden de Merito</th>
                     </tr>
                     <tr class="datosTabla">
                             <td><?php echo $row['id'] ?></td>
@@ -52,6 +53,17 @@ include "conexion.php";
                             <td><?php echo $row['fechaIni'] ?></td>
                             <td><?php echo $row['fechaFin'] ?></td>
                             <td><?php echo $row['nombreMat'] ?></td>
+                            <td>
+                                <?php 
+                                if($row['om_data']=''||$row['om_data']=null){
+                                    echo 'Sin cargar';
+                                }else{
+                                ?>
+                                    <button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button>
+                                <?php
+                                }
+                                ?>
+                            </td>
                     </tr>
                 </table>
                     <?php
@@ -65,4 +77,38 @@ include "conexion.php";
         ?>
     </div>
 </body>
+<script>
+      function descargarArchivo() {
+
+        // API endpoint to fetch the PDF data
+        const id = '<?php echo $id ?>'; //ID DE LA POSTULACION
+        console.log(id);
+        const apiUrl = `descargar_pdf.php?id=${id}`;
+  
+        // Fetch the PDF data using the API
+        fetch(apiUrl)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            // Decode the Base64 data to a binary PDF
+            const pdfData = atob(data.pdfData);
+  
+            // Create a Blob object from the binary PDF data
+            const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], { type: 'application/pdf' });
+  
+            // Create a temporary URL for the Blob
+            const blobUrl = URL.createObjectURL(blob);
+  
+            // Create a link to download the PDF
+            const downloadLink = document.createElement('a');
+            downloadLink.href = blobUrl;
+            downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
+            downloadLink.click();
+            // Clean up by revoking the Blob URL
+            URL.revokeObjectURL(blobUrl);
+          })
+          .catch(error => console.error('Error fetching PDF:', error));
+      }
+    </script>
 </html>

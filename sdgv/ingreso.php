@@ -55,7 +55,7 @@
         include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
-            <h2 class="text-center p-4 pt-5 titulo">Ingreso</h2>
+            <h2 class="text-center p-4 pt-3 titulo">Ingreso</h2>
             <p class="text-center descripcion">Registrese para continuar <a href="./registro.php">SignUp</a></p>
             <form action="validaFormIngreso.php" method="POST" class="d-flex flex-column iniciosesion">
                 <div class="d-flex justify-content-between formdiv m-2">

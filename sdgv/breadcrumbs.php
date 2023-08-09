@@ -19,155 +19,185 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
     $currentPath = parse_url($url)['path']; 
 
     $URL_MAP = array(
-        '/sdgv/inicio.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio")
+        '/inicio.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio")
         ),
-        '/sdgv/buscarvacantes.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/buscarvacantes.php", "label" => "Buscar Vacante")
+        '/buscarvacantes.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/buscarvacantes.php", "label" => "Buscar Vacante")
         ),
-        '/sdgv/muestravacantes.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/muestravacantes.php", "label" => "Mostrar vacantes abiertas")
+        '/muestravacantes.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/muestravacantes.php", "label" => "Mostrar vacantes abiertas")
         ),
-        '/sdgv/faqs.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/faqs.php", "label" => "Ayuda")
+        '/vacantes_cerradas.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/vacantes_cerradas.php", "label" => "Resultados de concursos")
         ),
-        '/sdgv/sobrenosotros.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/sobrenosotros.php", "label" => "Sobre Nosotros")
+        '/faqs.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/faqs.php", "label" => "Ayuda")
         ),
-        '/sdgv/ingreso.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/ingreso.php", "label" => "Ingresar")
+        '/sobrenosotros.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/sobrenosotros.php", "label" => "Sobre Nosotros")
         ),
-        '/sdgv/registro.php' => array(
-            array("path" => "/sdgv/inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/registro.php", "label" => "Registrarse")
+        '/ingreso.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/ingreso.php", "label" => "Ingresar")
+        ),
+        '/validaFormIngreso.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/ingreso.php", "label" => "Ingresar"),
+            array("path" => "/validaFormIngreso.php", "label" => "Error en el Ingreso")
+        ),
+        '/registro.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/registro.php", "label" => "Registrarse")
+        ),
+        '/aprobacion_registro.php' => array(
+            array("path" => "/inicio.php", "label" => "Inicio"),
+            array("path" => "/registro.php", "label" => "Registrarse"),
+            array("path" => "/aprobacion_registro.php", "label" => "Aprobacion del registro"),
         ),
         //CLIENTE
-        '/sdgv/cliente_inicio.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
+        '/cliente_inicio.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
         ),
-        '/sdgv/perfil_usuario.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
+        '/perfil_usuario.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
         ),
-        '/sdgv/editar_miperfil.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
-            array("path" => "/sdgv/editar_miperfil.php", "label" => "Editar Perfil"),
+        '/editar_miperfil.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
+            array("path" => "/editar_miperfil.php", "label" => "Editar Perfil"),
         ),
-        '/sdgv/cliente_postulaciones.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/cliente_postulaciones.php", "label" => "Mis Postulaciones"),
+        '/cliente_postulaciones.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/cliente_postulaciones.php", "label" => "Mis Postulaciones"),
         ),
-        '/sdgv/buscarvacantes.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/buscarvacantes.php", "label" => "Buscar Vacante")
+        '/buscarvacantes.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/buscarvacantes.php", "label" => "Buscar Vacante")
         ),
-        '/sdgv/vacantesabiertas.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/vacantesabiertas.php", "label" => "Mostrar vacantes abiertas"),
+        '/vacantesabiertas.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/vacantesabiertas.php", "label" => "Mostrar vacantes abiertas"),
         ),
-        '/sdgv/postularse.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/vacantesabiertas.php", "label" => "Mostrar vacantes abiertas"),
-            array("path" => "/sdgv/postularse.php", "label" => "Postulacion a vacante"),
+        '/vacantes_cerradas.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/vacantes_cerradas.php", "label" => "Resultados de concursos")
         ),
-        '/sdgv/faqs.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/faqs.php", "label" => "Ayuda")
+        '/postularse.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/vacantesabiertas.php", "label" => "Mostrar vacantes abiertas"),
+            array("path" => "/postularse.php", "label" => "Postulacion a vacante"),
         ),
-        '/sdgv/sobrenosotros.php' => array(
-            array("path" => "/sdgv/cliente_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/sobrenosotros.php", "label" => "Sobre Nosotros")
+        '/faqs.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/faqs.php", "label" => "Ayuda")
+        ),
+        '/sobrenosotros.php' => array(
+            array("path" => "/cliente_inicio.php", "label" => "Inicio"),
+            array("path" => "/sobrenosotros.php", "label" => "Sobre Nosotros")
         ),
         //JEFE DE CATEDRA
-        '/sdgv/jefecatedra_inicio.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
+        '/jefecatedra_inicio.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
         ),
-        '/sdgv/perfil_usuario.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
+        '/perfil_usuario.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
         ),
-        '/sdgv/editar_miperfil.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
-            array("path" => "/sdgv/editar_miperfil.php", "label" => "Editar Perfil"),
+        '/editar_miperfil.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
+            array("path" => "/editar_miperfil.php", "label" => "Editar Perfil"),
         ),
-        '/sdgv/jefecatedra_vacantes.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/jefecatedra_vacantes.php", "label" => "Mis materias"),
+        '/jefecatedra_vacantes.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/jefecatedra_vacantes.php", "label" => "Mis materias"),
         ),
-        '/sdgv/obtener_postulaciones.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/jefecatedra_vacantes.php", "label" => "Mis materias"),
-            array("path" => "/sdgv/obtener_postulaciones.php", "label" => "Postulaciones"),
+        '/obtener_postulaciones.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/jefecatedra_vacantes.php", "label" => "Mis materias"),
+            array("path" => "/obtener_postulaciones.php", "label" => "Postulaciones"),
         ),
-        '/sdgv/cargar_orden_merito.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/cargar_orden_merito.php", "label" => "Cargar orden de merito"),
+        '/carga_puntaje_postu.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/jefecatedra_vacantes.php", "label" => "Mis materias"),
+            array("path" => "/obtener_postulaciones.php", "label" => "Postulaciones"),
+            array("path" => "/carga_puntaje_postu.php", "label" => "Cargar Puntaje"),
         ),
-        '/sdgv/faqs.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/faqs.php", "label" => "Ayuda")
+        '/enviar_mail_postu.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/jefecatedra_vacantes.php", "label" => "Mis materias"),
+            array("path" => "/obtener_postulaciones.php", "label" => "Postulaciones"),
+            array("path" => "/enviar_mail_postu.php", "label" => "Notificacion a ganador"),
         ),
-        '/sdgv/sobrenosotros.php' => array(
-            array("path" => "/sdgv/jefecatedra_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/sobrenosotros.php", "label" => "Sobre Nosotros")
+        '/cargar_orden_merito.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/cargar_orden_merito.php", "label" => "Cargar orden de merito"),
+        ),
+        '/faqs.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/faqs.php", "label" => "Ayuda")
+        ),
+        '/sobrenosotros.php' => array(
+            array("path" => "/jefecatedra_inicio.php", "label" => "Inicio"),
+            array("path" => "/sobrenosotros.php", "label" => "Sobre Nosotros")
         ),
          //ADMIN
-         '/sdgv/admin_inicio.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
+         '/admin_inicio.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
         ),
-        '/sdgv/perfil_usuario.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
+        '/perfil_usuario.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
         ),
-        '/sdgv/editar_miperfil.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/perfil_usuario.php", "label" => "Mi Perfil"),
-            array("path" => "/sdgv/editar_miperfil.php", "label" => "Editar Perfil"),
+        '/editar_miperfil.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/perfil_usuario.php", "label" => "Mi Perfil"),
+            array("path" => "/editar_miperfil.php", "label" => "Editar Perfil"),
         ),
-        '/sdgv/listar_usuarios.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/listar_usuarios.php", "label" => "Gestion de Usuarios"),
-        ),
-
-        '/sdgv/editar_usuario.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/listar_usuarios.php", "label" => "Gestion de Usuarios"),
-            array("path" => "/sdgv/editar_usuario.php", "label" => "Editar usuario"),
+        '/listar_usuarios.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/listar_usuarios.php", "label" => "Gestion de Usuarios"),
         ),
 
-        '/sdgv/cargarvacante.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/cargarvacante.php", "label" => "Cargar nueva vacante"),
+        '/editar_usuario.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/listar_usuarios.php", "label" => "Gestion de Usuarios"),
+            array("path" => "/editar_usuario.php", "label" => "Editar usuario"),
         ),
-        '/sdgv/lista_vacantes.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/lista_vacantes.php", "label" => "Gestion de vacantes"),
+
+        '/cargarvacante.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/cargarvacante.php", "label" => "Cargar nueva vacante"),
         ),
-        '/sdgv/lista_postulaciones.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
+        '/lista_vacantes.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/lista_vacantes.php", "label" => "Gestion de vacantes"),
         ),
-        '/sdgv/editar_vacante.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/lista_vacantes.php", "label" => "Gestion de vacantes"),
-            array("path" => "/sdgv/editar_vacante.php", "label" => "Editar vacante"),
+        '/lista_postulaciones.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
         ),
-        '/sdgv/obtener_usuario.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
-            array("path" => "/sdgv/obtener_usuario.php", "label" => "Obtener usuario"),
+        '/editar_vacante.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/lista_vacantes.php", "label" => "Gestion de vacantes"),
+            array("path" => "/editar_vacante.php", "label" => "Editar vacante"),
         ),
-        '/sdgv/obtener_vacante.php' => array(
-            array("path" => "/sdgv/admin_inicio.php", "label" => "Inicio"),
-            array("path" => "/sdgv/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
-            array("path" => "/sdgv/obtener_vacante.php", "label" => "Obtener vacante"),
+        '/obtener_usuario.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
+            array("path" => "/obtener_usuario.php", "label" => "Obtener usuario"),
+        ),
+        '/obtener_vacante.php' => array(
+            array("path" => "/admin_inicio.php", "label" => "Inicio"),
+            array("path" => "/lista_postulaciones.php", "label" => "Gestion de postulaciones"),
+            array("path" => "/obtener_vacante.php", "label" => "Obtener vacante"),
         ),
     );
 
@@ -182,9 +212,9 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
                 foreach ($linkData as $row) {
                     $i++;
                     if ($i === $numItems) {
-                        echo '<li class="breadcrumb-item active lead " aria-current="page">' . $row["label"] . '</li>';
+                        echo '<li class="breadcrumb-item active" aria-current="page">' . $row["label"] . '</li>';
                     } else {
-                        echo '<li class="breadcrumb-item lead "><a href="' . $row["path"] . '">' . $row["label"] . '</a></li>';
+                        echo '<li class="breadcrumb-item"><a href="' . $row["path"] . '">' . $row["label"] . '</a></li>';
                     }
                 }
                 ?>

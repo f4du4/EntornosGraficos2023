@@ -14,6 +14,5 @@ $vResultado = mysqli_query($link,$vQuery);
 
 mysqli_close($link);
 header("Location: ./perfil_usuario.php");
-die;
 }
 ?>
