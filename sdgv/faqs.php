@@ -81,6 +81,11 @@
             <p class="questionfaqs px-5">6. ¿Puedo modificar mis datos? Por ejemplo, si cambio de email, o la contraseña, u otro.</p>
             <p class="answerfaqs fw-normal px-5">Si, una vez logueado, en cualquier momento puede cambiar sus datos personales 
                 lo puede hacer a traves de la seccion "Mi Perfil" que se encuentra dentro de la opción "Perfil" del menú. <br></p>
+            <p class="questionfaqs px-5">7. Si aun tengo dudas en como utilizar el sistema, ¿puedo comunicarlas de alguna manera?</p>
+            <p class="answerfaqs fw-normal px-5">Si, en cualquier momento que tengas alguna duda, comentario, u oportunidad de mejora para hacernos, podes
+                 dejarla expresa en la seccion "Sobre Nosotros", que esta dentro de la seccion de "Ayuda". Alli podras completar un formulario en el que 
+                 solo necesitas dejar tu nombre, tu email para que nos contactemos con vos para responder tu comentario, y tu comentario. Apenas envies tu comentario, lo recibiremos 
+                 y responderemos apenas sea posible. <br></p>
         </div>
         <?php
         include "./footer.html";

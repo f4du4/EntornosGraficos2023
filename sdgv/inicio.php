@@ -31,7 +31,7 @@ $_SESSION['email'] = '';
                 con el fin de lograr re-asignar los cargos de manera rapida y equitativa, donde los alumnos, 
                 los profesores y la institucion se vean beneficiados. <br></p>
             <h3 class="text-center p-3">MAPA DE SITIO</h3>
-            <img src="mapadesitio.png" alt="Mapa de Sitio del Sitio Web de Gestion de Vacantes de la UTN FRRo" class="mapasitio">
+            <img src="mapasitio_usuarios_no_logueados.png" alt="Mapa de Sitio del Sitio Web de Gestion de Vacantes de la UTN FRRo" class="mapasitio">
         </div>
         <?php
         include "./footer.html";

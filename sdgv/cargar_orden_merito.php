@@ -52,7 +52,7 @@ include "conexion.php";
                                 <td><?php echo $row['nombreMat'] ?></td>
                                 <td>
                                 <form action="procesar_cargar_ordenmerito.php" class="d-flex flex-column justify-content-center text-center" method="post" enctype="multipart/form-data">
-                                    <input class="p-2" type="file" accept="application/pdf" name="pdfFile" id="pdfFile" require>
+                                    <input class="p-2" type="file" accept="application/pdf" name="pdfFile" id="pdfFile" required>
                                     <input type="hidden" value = "<?php echo $row['id'] ?>" name ="idvac"><br>
                                     <input type="submit" name="submitcargar" value="Cargar" class="boton">
                                 </form>
