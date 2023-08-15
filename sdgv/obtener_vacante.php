@@ -3,6 +3,7 @@ include "conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@ include "conexion.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
@@ -25,19 +27,19 @@ include "conexion.php";
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Vacante asociada a la postulacion <?php echo $id ?></h2>
-            <?php 
+            <?php
             $idVacante = $_POST['idvac'];
             $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, vacantes.om_data, materias.nombreMat
             FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$idVacante'";
-            $vResultado = mysqli_query($link,$vQuery);
+            $vResultado = mysqli_query($link, $vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
-            if($num>0){
+            if ($num > 0) {
             ?>
-            <div class="row d-flex-row justify-content-center pt-2">
+                <div class="row d-flex-row justify-content-center pt-2">
 
-                <table class="tablaVacantes">
-                    <tr class="tituloTabla">
+                    <table class="tablaVacantes">
+                        <tr class="tituloTabla">
                             <th>ID</th>
                             <th>Puesto</th>
                             <th>Descripcion</th>
@@ -45,8 +47,8 @@ include "conexion.php";
                             <th>Fecha Cierre</th>
                             <th>Materia</th>
                             <th>Orden de Merito</th>
-                    </tr>
-                    <tr class="datosTabla">
+                        </tr>
+                        <tr class="datosTabla">
                             <td><?php echo $row['id'] ?></td>
                             <td><?php echo $row['nombre'] ?></td>
                             <td><?php echo $row['descripcion'] ?></td>
@@ -54,61 +56,64 @@ include "conexion.php";
                             <td><?php echo $row['fechaFin'] ?></td>
                             <td><?php echo $row['nombreMat'] ?></td>
                             <td>
-                                <?php 
-                                if($row['om_data']=''||$row['om_data']=null){
+                                <?php
+                                if ($row['om_data'] = '' || $row['om_data'] = null) {
                                     echo 'Sin cargar';
-                                }else{
+                                } else {
                                 ?>
                                     <button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button>
                                 <?php
                                 }
                                 ?>
                             </td>
-                    </tr>
-                </table>
-                    <?php
+                        </tr>
+                    </table>
+                <?php
             }
-                    ?>
-            
-            </div>
+                ?>
 
-        <?php
-        include "./footer.html";
-        ?>
-    </div>
+                </div>
+
+                <?php
+                include "./footer.html";
+                ?>
+        </div>
 </body>
 <script>
-      function descargarArchivo() {
+    function descargarArchivo() {
 
         // API endpoint to fetch the PDF data
         const id = '<?php echo $id ?>'; //ID DE LA POSTULACION
         console.log(id);
         const apiUrl = `descargar_pdf.php?id=${id}`;
-  
+
         // Fetch the PDF data using the API
         fetch(apiUrl)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            // Decode the Base64 data to a binary PDF
-            const pdfData = atob(data.pdfData);
-  
-            // Create a Blob object from the binary PDF data
-            const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], { type: 'application/pdf' });
-  
-            // Create a temporary URL for the Blob
-            const blobUrl = URL.createObjectURL(blob);
-  
-            // Create a link to download the PDF
-            const downloadLink = document.createElement('a');
-            downloadLink.href = blobUrl;
-            downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
-            downloadLink.click();
-            // Clean up by revoking the Blob URL
-            URL.revokeObjectURL(blobUrl);
-          })
-          .catch(error => console.error('Error fetching PDF:', error));
-      }
-    </script>
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                // Decode the Base64 data to a binary PDF
+                const pdfData = atob(data.pdfData);
+
+                // Create a Blob object from the binary PDF data
+                const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], {
+                    type: 'application/pdf'
+                });
+
+                // Create a temporary URL for the Blob
+                const blobUrl = URL.createObjectURL(blob);
+
+                // Create a link to download the PDF
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobUrl;
+                downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
+                downloadLink.click();
+                // Clean up by revoking the Blob URL
+                URL.revokeObjectURL(blobUrl);
+            })
+            .catch(error => console.error('Error fetching PDF:', error));
+    }
+</script>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,28 +28,27 @@
         }
 
         function validaSoloLetras(target) {
-            console.log({target})
             var regEx = /^[A-Za-z]+$/;
-            if(target.value.match(regEx)) {
-                if(!!target.nextElementSibling) {
+            if (target.value.match(regEx)) {
+                if (!!target.nextElementSibling) {
                     target.nextElementSibling.classList.add("hidden");
                     target.nextElementSibling.classList.remove("shown");
                 }
                 return true;
-            }
-            else {
-                if(!!target.nextElementSibling) {
+            } else {
+                if (!!target.nextElementSibling) {
                     target.nextElementSibling.classList.remove("hidden");
                     target.nextElementSibling.classList.add("shown");
                 }
                 return false;
             }
-        }   
+        }
     </script>
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
-        
+
         <?php
         include "./header.html";
         include "./menu.html";
@@ -59,21 +59,22 @@
             <p class="text-center descripcion">Registrese para continuar <a href="./registro.php">SignUp</a></p>
             <form action="validaFormIngreso.php" method="POST" class="d-flex flex-column iniciosesion">
                 <div class="d-flex justify-content-between formdiv m-2">
-                <label class="formlabel" for="">Email:</label>
-                <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..."required/>
+                    <label class="formlabel" for="">Email:</label>
+                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..." required />
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2 position-relative">
-                <label class="formlabel" for="">Contraseña:</label>
-                <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required>
-                <i id="password-icon" onclick="cambiarVisibilidad()" class="bi bi-eye-slash position-absolute end-0"></i>
+                    <label class="formlabel" for="">Contraseña:</label>
+                    <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required>
+                    <i id="password-icon" onclick="cambiarVisibilidad()" class="bi bi-eye-slash position-absolute end-0"></i>
                 </div>
                 <button type="submit" name="submitingreso" class="mt-4 mb-5 p-2 click boton">INGRESAR</button>
             </form>
 
         </div>
-    <?php
-    include "./footer.html";
-     ?>
+        <?php
+        include "./footer.html";
+        ?>
     </div>
 </body>
+
 </html>

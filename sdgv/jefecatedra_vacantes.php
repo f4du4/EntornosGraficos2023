@@ -1,10 +1,10 @@
 <?php
 session_start();
 include "conexion.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,45 +17,46 @@ include "conexion.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
         include "./jefecatedra_header.html";
         include "./jefecatedra_menu.html";
         include "./breadcrumbs.php";
-        
+
         $idJefeCatedra = $_SESSION['id'];
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-3 titulo">Mis Materias</h2>
-            
-            <table class="tablaVacantes">
-                    <tr class="tituloTabla">
-                    <th>Materia</th>
-                    <th>Accion</th> 
-                    </tr>
-                    
-                    <?php 
 
-                    $vQuery = "SELECT materias.id, materias.nombreMat FROM materias 
+            <table class="tablaVacantes">
+                <tr class="tituloTabla">
+                    <th>Materia</th>
+                    <th>Accion</th>
+                </tr>
+
+                <?php
+
+                $vQuery = "SELECT materias.id, materias.nombreMat FROM materias 
                     WHERE materias.jefecatedra_id = $idJefeCatedra";
-                    
-                    $vResultado = mysqli_query($link,$vQuery);
-                    while($row = $vResultado->fetch_array()){
-                    ?>
+
+                $vResultado = mysqli_query($link, $vQuery);
+                while ($row = $vResultado->fetch_array()) {
+                ?>
                     <tr class="datosTabla">
                         <td><?php echo $row['nombreMat'] ?></td>
                         <td>
                             <form action="obtener_postulaciones.php" method="post">
                                 <input type="hidden" name="idMateria" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-primary" value= "Ver Postulaciones" name="submitpostu">
+                                <input type="submit" class="btn btn-primary" value="Ver Postulaciones" name="submitpostu">
                             </form>
                         </td>
-                        
+
                     </tr>
-                    <?php
-                    }
-                    ?>
+                <?php
+                }
+                ?>
             </table>
         </div>
 
@@ -64,4 +65,5 @@ include "conexion.php";
         ?>
     </div>
 </body>
+
 </html>

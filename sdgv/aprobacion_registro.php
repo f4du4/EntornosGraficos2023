@@ -1,9 +1,10 @@
-<?php 
+<?php
 session_start();
 $_SESSION['email'] = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@ $_SESSION['email'] = '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
@@ -24,13 +26,16 @@ $_SESSION['email'] = '';
         include "./breadcrumbs.php";
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
-        <h2 class="correctoBackend">¡Fuiste Registrado Exitosamente! <br><br>
-        <a href="./ingreso.php" class="btn btn-light">Iniciar Sesion</a></h2>
+            <h2 class="correctoBackend">¡Fuiste Registrado Exitosamente!
+                <br>
+                <br>
+                <a href="./ingreso.php" class="btn btn-light">Iniciar Sesion</a>
+            </h2>
         </div>
         <?php
         include "./footer.html";
         ?>
     </div>
 </body>
+
 </html>
-    

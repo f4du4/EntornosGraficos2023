@@ -3,6 +3,7 @@ include "conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@ include "conexion.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
@@ -22,19 +24,19 @@ include "conexion.php";
         include "./jefecatedra_menu.html";
         include "./breadcrumbs.php";
         $idMateria = $_POST['idMateria'];
-    
+
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-3 titulo">Postulaciones asociadas a la materia <?php echo $idMateria ?></h2>
-            <?php 
+            <?php
             $vQuery = "SELECT vacantes.nombre, vacantes.fechaFin, postulaciones.usuarios_id, postulaciones.id, materias.nombreMat FROM vacantes INNER JOIN postulaciones ON 
             vacantes.id = postulaciones.vacantes_id INNER JOIN materias ON materias.id = vacantes.materia
             WHERE vacantes.materia = '$idMateria' AND postulaciones.estado != 'Rechazada'"; //ACA TENDRIA Q TRAER EL CV!PARA q se lo deje ver en la tabla
-            $vResultado = mysqli_query($link,$vQuery);
+            $vResultado = mysqli_query($link, $vQuery);
             $row = mysqli_fetch_array($vResultado);
             $num = mysqli_num_rows($vResultado);
-                
-            if($num>0){
+
+            if ($num > 0) {
                 date_default_timezone_set("America/Argentina/Buenos_Aires"); //defino la zona horaria
                 $dia = date("d"); //j es los dias sin el cero adelante
                 $mes = date("m"); //n es los meses sin el cero adelante
@@ -50,42 +52,41 @@ include "conexion.php";
                 FROM usuarios INNER JOIN postulaciones ON postulaciones.usuarios_id = usuarios.id";
                 $vResultUser = mysqli_query($link, $vQueryUser);
                 $num_user = mysqli_num_rows($vResultUser);
-                if($num_user>0){
-
-                    if($row['fechaFin'] <= '$hoy'){
+                if ($num_user > 0) {
+                    if ($row['fechaFin'] <= '$hoy') {
                         echo "Esta vacante ya esta cerrada";
-                    }else{ echo "Esta vacante aun no esta cerrada";}
-                        ?>
-                        <div class="row d-flex-row justify-content-center pt-2">
+                    } else {
+                        echo "Esta vacante aun no esta cerrada";
+                    }
+            ?>
+                    <div class="row d-flex-row justify-content-center pt-2">
 
                         <table class="tablaVacantes">
                             <tr class="tituloTabla">
-                                    <th>Puesto</th>
-                                    <th>Postulante</th>
-                                    <th>CV</th>
-                                    <th>Puntaje</th>
-                                    <th>Notificar Ganador</th>
-
+                                <th>Puesto</th>
+                                <th>Postulante</th>
+                                <th>CV</th>
+                                <th>Puntaje</th>
+                                <th>Notificar Ganador</th>
                             </tr>
                             <?php
-                            while($user = $vResultUser->fetch_array()){
+                            while ($user = $vResultUser->fetch_array()) {
                             ?>
-                            <tr class="datosTabla">
+                                <tr class="datosTabla">
                                     <td><?php echo $row['nombre'] ?></td>
                                     <td><?php echo $user['email'] ?></td>
                                     <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></button></td>
                                     <td>
                                         <?php
-                                        if($user['puntaje'] != '0' && $user['puntaje'] != null){
+                                        if ($user['puntaje'] != '0' && $user['puntaje'] != null) {
                                             echo $user['puntaje'];
-                                            
-                                        }else{
-                                            ?>
+                                        } else {
+                                        ?>
                                             <form action="carga_puntaje_postu.php" method="post">
                                                 <input type="hidden" name="idPostu" readonly value="<?php echo $row['id'] ?>">
                                                 <input type="submit" name="submitPostu" value="Cargar" class="btn btn-success exito">
                                             </form>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                     </td>
@@ -101,53 +102,56 @@ include "conexion.php";
                                             <button class="descargarpdf" name="submitEmail"><i class="bi bi-envelope-at"></i> </button>
                                         </form>
                                     </td>
-                            </tr>
+                                </tr>
                         </table>
-                        <?php
-                    }
-                }else{ ?><h3>No hay postulantes aun</h3><?php }
-            }else{?> <h3>No hay vacantes abiertas de esta materia</h3><?php }
-                    ?>
-            
-            </div>
+                    <?php
+                            }
+                        } else { ?><h3>No hay postulantes aun</h3><?php }
+                                                } else { ?> <h3>No hay vacantes abiertas de esta materia</h3><?php }
+                                                                        ?>
 
-        <?php
-        include "./footer.html";
-        ?>
-    </div>
+                    </div>
+
+                    <?php
+                    include "./footer.html";
+                    ?>
+        </div>
 </body>
 <script>
-      function descargarArchivo() {
+    function descargarArchivo() {
 
         // API endpoint to fetch the PDF data
         const id = '<?php echo $id ?>';
         console.log(id);
         const apiUrl = `descargar_pdf.php?id=${id}`;
-  
+
         // Fetch the PDF data using the API
         fetch(apiUrl)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            // Decode the Base64 data to a binary PDF
-            const pdfData = atob(data.pdfData);
-  
-            // Create a Blob object from the binary PDF data
-            const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], { type: 'application/pdf' });
-  
-            // Create a temporary URL for the Blob
-            const blobUrl = URL.createObjectURL(blob);
-  
-            // Create a link to download the PDF
-            const downloadLink = document.createElement('a');
-            downloadLink.href = blobUrl;
-            downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
-            downloadLink.click();
-            // Clean up by revoking the Blob URL
-            URL.revokeObjectURL(blobUrl);
-          })
-          .catch(error => console.error('Error fetching PDF:', error));
-      }
-    </script>
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                // Decode the Base64 data to a binary PDF
+                const pdfData = atob(data.pdfData);
+
+                // Create a Blob object from the binary PDF data
+                const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], {
+                    type: 'application/pdf'
+                });
+
+                // Create a temporary URL for the Blob
+                const blobUrl = URL.createObjectURL(blob);
+
+                // Create a link to download the PDF
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobUrl;
+                downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
+                downloadLink.click();
+                // Clean up by revoking the Blob URL
+                URL.revokeObjectURL(blobUrl);
+            })
+            .catch(error => console.error('Error fetching PDF:', error));
+    }
+</script>
+
 </html>

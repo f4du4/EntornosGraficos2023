@@ -3,6 +3,7 @@ include "conexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +16,9 @@ include "conexion.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
-        
         <?php
         include "./jefecatedra_header.html";
         include "./jefecatedra_menu.html";
@@ -26,24 +27,25 @@ include "conexion.php";
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-3 titulo">Cargar Puntaje</h2>
             <?php
-            if(isset($_POST['submitPostu'])){
+            if (isset($_POST['submitPostu'])) {
                 $idPostulacion = $_POST['idPostu'];
-                ?>
+            ?>
                 <form method="post" action="procesar_cargar_puntaje.php" class="d-flex flex-column iniciosesion">
                     <label for="">Puntaje:</label>
                     <input type="number" name="puntos" placeholder="Cargue el puntaje"><br>
                     <input type="hidden" name="idPos" readonly value="<?php echo $idPostulacion ?>"><br>
-                    <input type="submit" name="submitCarga" class="btn btn-success exito" value="Cargar"><br><br>
+                    <input type="submit" name="submitCarga" class="btn btn-success exito" value="Cargar"><br> <br>
                 </form>
             <?php
             }
             ?>
         </div>
-    <?php
-    include "./footer.html";
-     ?>
+        <?php
+        include "./footer.html";
+        ?>
     </div>
 </body>
+
 </html>
 <?php
 mysqli_close($link);

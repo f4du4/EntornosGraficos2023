@@ -21,4 +21,4 @@ if(isset($_POST['submitenviar'])){
     mysqli_close($link);
     header("Location: ./cliente_postulaciones.php"); 
     }
-    ?>
+?>

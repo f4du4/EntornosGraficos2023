@@ -7,3 +7,4 @@ if(isset($_POST['submitCarga'])){
     mysqli_query($link, $vQuery) or die (mysqli_error($link));
     header("Location: ./jefecatedra_vacantes.php"); 
 }
+?>

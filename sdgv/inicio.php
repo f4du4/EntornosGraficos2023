@@ -1,9 +1,10 @@
-<?php 
+<?php
 session_start();
 $_SESSION['email'] = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@ $_SESSION['email'] = '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
@@ -25,11 +27,14 @@ $_SESSION['email'] = '';
         ?>
         <div class="row d-flex-row justify-content-center pt-2">
             <h1 class="text-center inicio p-4">¡Bienvendo al Sistema de Gestion de Vacantes de la Universidad Tecnológica Nacional - FRRo!</h1>
-            <p class="inicio descripcion p-3 text-center">La universidad Tecnológica Nacional de Rosario se encuentra ubicada en el centro de la ciudad de Rosario, 
-                con direccion en Zeballos 1341, fue fundada en 1953 y actualmente consta de cinco carreras de grado. <br> <br>
-                Este sitio web tiene como proposito la agilizacion del proceso de postulacion a vacantes en la Universidad, 
-                con el fin de lograr re-asignar los cargos de manera rapida y equitativa, donde los alumnos, 
-                los profesores y la institucion se vean beneficiados. <br></p>
+            <p class="inicio descripcion p-3 text-center">La universidad Tecnológica Nacional de Rosario se encuentra ubicada en el centro de la ciudad de Rosario,
+                con direccion en Zeballos 1341, fue fundada en 1953 y actualmente consta de cinco carreras de grado. <br>
+                <br>
+                Este sitio web tiene como proposito la agilizacion del proceso de postulacion a vacantes en la Universidad,
+                con el fin de lograr re-asignar los cargos de manera rapida y equitativa, donde los alumnos,
+                los profesores y la institucion se vean beneficiados.
+                <br>
+            </p>
             <h3 class="text-center p-3">MAPA DE SITIO</h3>
             <img src="mapasitio_usuarios_no_logueados.png" alt="Mapa de Sitio del Sitio Web de Gestion de Vacantes de la UTN FRRo" class="mapasitio">
         </div>
@@ -38,4 +43,5 @@ $_SESSION['email'] = '';
         ?>
     </div>
 </body>
+
 </html>

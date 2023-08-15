@@ -4,6 +4,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./estilos.css">
 </head>
+
 <body>
     <div class="container-fluid d-flex-row m-0">
         <?php
@@ -25,69 +27,67 @@ session_start();
         ?>
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h1 class="text-center p-4 pt-3 titulo">Gestion de Usuarios</h2>
-            <table class="tablaVacantes">
+                <table class="tablaVacantes">
                     <tr class="tituloTabla">
-                    
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <!--<th>Contraseña</th> -->
-                    <th>Rol</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
-                    
-                    <?php 
-                    $vQuery = "SELECT usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.rol_id, roles.descripcion FROM usuarios
+
+                    <?php
+                    $vQuery = "SELECT usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.rol_id, usuarios.id, roles.descripcion FROM usuarios
                      INNER JOIN roles ON usuarios.rol_id = roles.id";
-                    $vResultado = mysqli_query($link,$vQuery);
-                    while($row = $vResultado->fetch_array()){
+                    $vResultado = mysqli_query($link, $vQuery);
+                    while ($row = $vResultado->fetch_array()) {
                     ?>
-                    <tr class="datosTabla">
-                        
-                        <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['apellido'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
-                        <!--al final no muestro contra-->
-                        <td><?php echo $row['descripcion'] ?></td>
-                        <td>
-                            <form action="editar_usuario.php" method="post">
-                                <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                <input type="submit" class="btn btn-success exito" value= "Editar" name="submiteditar">
-                            </form>
-                        </td>
-                        <td>
-                            <?php
-                            if($_SESSION['rol_id']==3){  //usuario admin no puede eliminar a otros admin
-                                if($row['rol_id']!=3 && $row['rol_id']!=4){
-                                ?>
-                                <form action="eliminar_usuario.php" method="post">
+                        <tr class="datosTabla">
+
+                            <td><?php echo $row['nombre'] ?></td>
+                            <td><?php echo $row['apellido'] ?></td>
+                            <td><?php echo $row['email'] ?></td>
+                            <td><?php echo $row['descripcion'] ?></td>
+                            <td>
+                                <form action="editar_usuario.php" method="post">
                                     <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                    <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
+                                    <input type="submit" class="btn btn-success exito" value="Editar" name="submiteditar">
                                 </form>
+                            </td>
+                            <td>
                                 <?php
-                                }else{
-                                    ?>
-                                    <form method="post">
-                                        <input type="submit" class="btn btn-secondary exito" disabled value= "Eliminar" name="submiteliminar">
-                                    </form>
+                                if ($_SESSION['rol_id'] == 3) {
+                                    if ($row['rol_id'] != 3 && $row['rol_id'] != 4) {
+                                ?>
+                                        <form action="eliminar_usuario.php" method="post">
+                                            <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
+                                            <input type="submit" class="btn btn-danger exito" value="Eliminar" name="submiteliminar">
+                                        </form>
                                     <?php
-                                }
-                            }else if($_SESSION['rol_id']==4){ //usuario superadmin si puede eliminar a los admin
-                                ?>
-                                <form action="eliminar_usuario.php" method="post">
-                                    <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
-                                    <input type="submit" class="btn btn-danger exito" value= "Eliminar" name="submiteliminar">
-                                </form>
+                                    } else {
+                                    ?>
+                                        <form method="post">
+                                            <input type="submit" class="btn btn-secondary exito" disabled value="Eliminar" name="submiteliminar">
+                                        </form>
+                                    <?php
+                                    }
+                                } else if ($_SESSION['rol_id'] == 4) {
+                                    ?>
+                                    <form action="eliminar_usuario.php" method="post">
+                                        <input type="hidden" name="iduser" readonly value="<?php echo $row['id'] ?>">
+                                        <input type="submit" class="btn btn-danger exito" value="Eliminar" name="submiteliminar">
+                                    </form>
                                 <?php
-                            }
-                            ?>
-                        </td>
-                    </tr>
+                                }
+                                ?>
+                            </td>
+                        </tr>
                     <?php
                     }
                     ?>
-            </table>
+                </table>
         </div>
 
         <?php
@@ -95,4 +95,5 @@ session_start();
         ?>
     </div>
 </body>
+
 </html>
