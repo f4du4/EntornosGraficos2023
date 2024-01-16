@@ -60,11 +60,11 @@ require_once "../../index.php";
             <form action="../../controladora/ingreso/valida_form_ingreso.php" method="POST" class="d-flex flex-column iniciosesion">
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Email:</label>
-                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..." required />
+                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..." required autocomplete="off" />
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2 position-relative">
                     <label class="formlabel" for="">Contraseña:</label>
-                    <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required>
+                    <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required autocomplete="off">
                     <i id="password-icon" onclick="cambiarVisibilidad()" class="bi bi-eye-slash position-absolute end-0"></i>
                 </div>
                 <button type="submit" name="submitingreso" class="mt-4 mb-5 p-2 click boton">INGRESAR</button>

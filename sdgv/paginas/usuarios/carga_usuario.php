@@ -52,20 +52,20 @@ session_start();
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Nombre:</label>
                     <div class="containerError">
-                        <input class="px-3" type="text" name="Nom" placeholder="Ingrese nombre..." required onchange="validaSoloLetras(this)" />
+                        <input class="px-3" type="text" name="Nom" placeholder="Ingrese nombre..." required onchange="validaSoloLetras(this)" autocomplete="off" />
                         <div class="error hidden">Nombre invalido: solo ingresar letras</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Apellido:</label>
                     <div class="containerError">
-                        <input class="px-3" type="text" name="Ape" placeholder="Ingrese apellido..." required onchange="validaSoloLetras(this)" />
+                        <input class="px-3" type="text" name="Ape" placeholder="Ingrese apellido..." required onchange="validaSoloLetras(this)" autocomplete="off" />
                         <div class="error hidden">Apellido invalido: solo ingresar letras</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Email:</label>
-                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese email..." required />
+                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese email..." required autocomplete="off" />
                 </div>
                 <button type="submit" name="submitregistro" class="mt-3 mb-3 p-2 click boton">REGISTRAR</button>
             </form>
