@@ -10,7 +10,7 @@ if (isset($_POST["submiteditar"])) {
     $vQuery = "UPDATE usuarios SET usuarios.nombre = '$nom', usuarios.apellido = '$ape',
 usuarios.email = '$email', usuarios.pass = '$pass' WHERE usuarios.id = '$id'";
     $vResultado = mysqli_query($link, $vQuery);
-    mysqli_free_result($vResultado);
     header("Location: ../../paginas/usuarios/perfil_usuario.php");
 }
+mysqli_free_result($vResultado);
 mysqli_close($link);

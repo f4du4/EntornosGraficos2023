@@ -34,7 +34,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
                 $vResultado = mysqli_query($link, $vQuery);
                 $vResMat = mysqli_query($link, $MateriasQuery);
                 $row = mysqli_fetch_array($vResultado);
-                mysqli_free_result($vResultado);
+
                 $num = mysqli_num_rows($vResultado);
                 $numMat = mysqli_num_rows($vResMat);
                 if ($num > 0 && $numMat > 0) {
@@ -84,6 +84,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
                     ?>
                     </div>
                     <?php
+                    mysqli_free_result($vResultado);
                     mysqli_free_result($vResMat);
                     mysqli_close($link);
                     include BASE_PATH .

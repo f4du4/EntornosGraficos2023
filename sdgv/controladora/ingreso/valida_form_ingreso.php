@@ -13,7 +13,6 @@ $vQuery = "SELECT * FROM usuarios WHERE usuarios.email='$vMail' AND usuarios.pas
 ($vResultado = mysqli_query($link, $vQuery)) or die(mysqli_error($link));
 $row = mysqli_fetch_array($vResultado);
 $num_rows = mysqli_num_rows($vResultado);
-mysqli_free_result($vResultado);
 
 if ($num_rows > 0) {
     $_SESSION["id"] = $row["id"];
@@ -40,8 +39,10 @@ if ($num_rows > 0) {
         header("Location: ../../paginas/inicio/admin_inicio.php");
         exit();
     }
+    mysqli_free_result($vResultado);
     mysqli_close($link);
 } else {
+    mysqli_free_result($vResultado);
     mysqli_close($link);
 ?>
     <!DOCTYPE html>

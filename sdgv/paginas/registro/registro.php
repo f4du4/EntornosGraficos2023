@@ -63,24 +63,24 @@ require_once "../../index.php"; ?>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Nombre:</label>
                     <div class="containerError">
-                        <input class="px-3" type="text" name="Nom" placeholder="Ingrese su nombre..." required onchange="validaSoloLetras(this)" autocomplete="off" />
+                        <input class="px-3" type="text" name="Nom" placeholder="Ingrese su nombre..." required onchange="validaSoloLetras(this)" autocomplete="one-time-code" />
                         <div class="error hidden">Nombre invalido: solo ingresar letras</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Apellido:</label>
                     <div class="containerError">
-                        <input class="px-3" type="text" name="Ape" placeholder="Ingrese su apellido..." required onchange="validaSoloLetras(this)" autocomplete="off" />
+                        <input class="px-3" type="text" name="Ape" placeholder="Ingrese su apellido..." required onchange="validaSoloLetras(this)" autocomplete="one-time-code" />
                         <div class="error hidden">Apellido invalido: solo ingresar letras</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Email:</label>
-                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..." required autocomplete="off" />
+                    <input class="px-3" type="email" name="Mail" placeholder="Ingrese su email..." required autocomplete="one-time-code" />
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2 position-relative">
                     <label class="formlabel" for="">Contraseña:</label>
-                    <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required autocomplete="off">
+                    <input id="password-input" class="px-3" type="password" name="Contra" placeholder="Ingrese su contraseña..." required autocomplete="one-time-code">
                     <i id="password-icon" onclick="cambiarVisibilidad()" class="bi bi-eye-slash position-absolute end-0"></i>
                 </div>
                 <button type="submit" name="submitregistro" class="mt-3 mb-3 p-2 click boton">REGISTRARSE</button>

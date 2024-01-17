@@ -30,8 +30,9 @@ include BASE_PATH . "/controladora/db/conexion.php";
       <?php
       $idusuario = $_POST["idusu"];
       $vQuery = "SELECT usuarios.id, usuarios.nombre, usuarios.apellido, usuarios.email,
-            usuarios.pass, roles.descripcion AS rol FROM usuarios INNER JOIN roles ON roles.id = usuarios.rol_id
-            WHERE usuarios.id = '$idusuario'";
+            usuarios.pass, roles.descripcion AS rol, postulaciones.cv_data FROM usuarios INNER JOIN roles ON roles.id = usuarios.rol_id
+            INNER JOIN postulaciones ON postulaciones.usuarios_id = usuarios.id
+            WHERE usuarios.id = '$idusuario' AND postulaciones.id = '$id'";
       $vResultado = mysqli_query($link, $vQuery);
       $row = mysqli_fetch_array($vResultado);
       $num = mysqli_num_rows($vResultado);
@@ -53,7 +54,17 @@ include BASE_PATH . "/controladora/db/conexion.php";
               <td><?php echo $row["apellido"]; ?></td>
               <td><?php echo $row["email"]; ?></td>
               <td><?php echo $row["rol"]; ?></td>
-              <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+              <?php
+              if ($row["cv_data"] == null || $row["cv_data"] == '') {
+              ?>
+                <td><button class="descargarpdf" style="color:red"><i class="bi bi-filetype-pdf"></i></button></td>
+              <?php
+              } else {
+              ?>
+                <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+              <?php
+              }
+              ?>
             </tr>
           </table>
         <?php }

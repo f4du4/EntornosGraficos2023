@@ -28,8 +28,7 @@ session_start();
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-3 titulo">Cargar Orden de Merito</h2>
             <?php
-            $vQuery = "SELECT materias.nombreMat, vacantes.nombre, vacantes.id FROM materias INNER JOIN vacantes ON vacantes.materia = materias.id
-                    WHERE materias.jefecatedra_id = $idJefeCatedra AND vacantes.om_data = ''";
+            $vQuery = "SELECT materias.nombreMat, vacantes.nombre, vacantes.id FROM materias INNER JOIN vacantes ON vacantes.materia = materias.id WHERE materias.jefecatedra_id = $idJefeCatedra AND vacantes.om_data is NULL";
             $vResultado = mysqli_query($link, $vQuery);
             $num_rows = mysqli_num_rows($vResultado);
             if ($num_rows > 0) { ?>

@@ -33,7 +33,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
             FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$idVacante'";
             $vResultado = mysqli_query($link, $vQuery);
             $row = mysqli_fetch_array($vResultado);
-            mysqli_free_result($vResultado);
+
             $num = mysqli_num_rows($vResultado);
             if ($num > 0) { ?>
                 <div class="row d-flex-row justify-content-center pt-2">
@@ -70,6 +70,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
                         </tr>
                     </table>
                 <?php }
+            mysqli_free_result($vResultado);
             mysqli_close($link);
                 ?>
 

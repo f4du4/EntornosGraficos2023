@@ -17,6 +17,6 @@ if (isset($_POST["submitcargar"])) {
         $vQuery = "UPDATE vacantes SET om_nombre = '$nombrepdf', om_data = '$pdfDataBase64' WHERE vacantes.id = $idVacante";
         mysqli_query($link, $vQuery) or die(mysqli_error($link));
     }
-    header("Location: ../paginas/vacantes/orden_merito/cargar_orden_merito.php");
+    header("Location: ../../../paginas/vacantes/cargar_orden_merito.php");
 }
 mysqli_close($link);

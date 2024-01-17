@@ -71,7 +71,17 @@ session_start();
                             <td><?php echo $row["nombre"]; ?></td>
                             <td><?php echo $row["fechaFin"]; ?></td>
                             <td><?php echo $row["nombreMat"]; ?></td>
-                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            if ($row["om_data"] == null || $row["om_data"] == '') {
+                            ?>
+                                <td><button class="descargarpdf" style="color:red"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            } else {
+                            ?>
+                                <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            }
+                            ?>
                             <td>
                                 <form action="../postulaciones/postularse.php" method="post">
                                     <input type="hidden" name="idvacante" readonly value="<?php echo $row["id"]; ?>">

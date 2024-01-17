@@ -54,9 +54,10 @@ include BASE_PATH . "/controladora/db/conexion.php";
                     </form>
 
             <?php
-                mysqli_free_result($vResult);
+
             }
         }
+        mysqli_free_result($vResult);
         mysqli_close($link);
         include BASE_PATH . "/componentes/footer/footer.html";
             ?>

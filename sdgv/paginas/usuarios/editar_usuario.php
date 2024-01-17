@@ -63,13 +63,14 @@ include BASE_PATH . "/controladora/db/conexion.php";
                                         <?php echo $rowRol["descripcion"]; ?>
                                     </option>
                                 <?php }
-                                mysqli_free_result($vRolesResultado); ?>
+                                ?>
                             </select>
                             <br> <br>
                             <input type="submit" name="submiteditar" value="Editar" class="btn btn-success"> <br> <br>
                         </form>
                     <?php
                 }
+                mysqli_free_result($vRolesResultado);
                 mysqli_close($link);
                     ?>
 

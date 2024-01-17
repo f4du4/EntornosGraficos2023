@@ -12,8 +12,8 @@ if (isset($_POST["submiteditar"])) {
 usuarios.email = '$email', usuarios.rol_id = '$rol' WHERE usuarios.id = '$id'";
     $vResultado = mysqli_query($link, $vQuery);
 
-    mysqli_free_result($vResultado);
     header("Location: ../../paginas/usuarios/listar_usuarios.php");
     die();
 }
+mysqli_free_result($vResultado);
 mysqli_close($link);

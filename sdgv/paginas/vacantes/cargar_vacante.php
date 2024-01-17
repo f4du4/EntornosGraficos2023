@@ -37,6 +37,17 @@ include BASE_PATH . "/controladora/db/conexion.php";
                 return false;
             }
         }
+
+        function validarFechas() {
+            var fechaInicio = new Date(document.getElementById("fechaInicio").value);
+            var fechaCierre = new Date(document.getElementById("fechaCierre").value);
+
+            if (fechaCierre <= fechaInicio) {
+                alert("La fecha de cierre debe ser posterior a la fecha de inicio.");
+                return false; // Evita que el formulario se envíe
+            }
+            return true; // Permite que el formulario se envíe si las fechas son válidas
+        }
     </script>
 </head>
 
@@ -51,25 +62,25 @@ include BASE_PATH . "/controladora/db/conexion.php";
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Cargar vacante</h2>
             <p class="text-center descripcion">Completa los siguientes datos</p>
-            <form method="POST" class="d-flex flex-column iniciosesion">
+            <form method="POST" class="d-flex flex-column iniciosesion" onsubmit="return validarFechas()">
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Puesto vacante:</label>
                     <div class="containerError">
-                        <input class="px-3" type="text" name="Nom" placeholder="Ej: Profesor" required onchange="validaSoloLetras(this)" />
+                        <input autocomplete="one-time-code" class="px-3" type="text" name="Nom" placeholder="Ej: Profesor" required onchange="validaSoloLetras(this)" />
                         <div class="error hidden">Puesto de vacante invalido: solo ingresar letras</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Descripcion de la vacante:</label>
-                    <input class="px-3" type="text" name="Desc" placeholder="Ej: Profesor suplente turno noche" />
+                    <input autocomplete="one-time-code" class="px-3" type="text" name="Desc" placeholder="Ej: Profesor suplente turno noche" />
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Fecha de Inicio:</label>
-                    <input class="px-3" type="date" name="Ini" placeholder="DD-MM-YYYY" required />
+                    <input id="fechaInicio" autocomplete="one-time-code" class="px-3" type="date" name="Ini" placeholder="DD-MM-YYYY" required />
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2 position-relative">
                     <label class="formlabel" for="">Fecha de Cierre:</label>
-                    <input class="px-3" type="date" name="Fin" placeholder="DD-MM-YYYY" required>
+                    <input id="fechaCierre" autocomplete="one-time-code" class="px-3" type="date" name="Fin" placeholder="DD-MM-YYYY" required>
                 </div>
                 <div class="d-flex justify-content-between formdiv m-2">
                     <label class="formlabel" for="">Materia:</label>
