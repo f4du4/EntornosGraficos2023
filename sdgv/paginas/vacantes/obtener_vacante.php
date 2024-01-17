@@ -29,7 +29,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
             <h2 class="text-center p-4 pt-5 titulo">Vacante asociada a la postulacion <?php echo $id; ?></h2>
             <?php
             $idVacante = $_POST["idvac"];
-            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, vacantes.om_data, materias.nombreMat
+            $vQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.descripcion, vacantes.fechaIni, vacantes.fechaFin, vacantes.om_data, materias.nombreMat, vacantes.om_data
             FROM vacantes INNER JOIN materias ON materias.id = vacantes.materia WHERE vacantes.id = '$idVacante'";
             $vResultado = mysqli_query($link, $vQuery);
             $row = mysqli_fetch_array($vResultado);
@@ -55,18 +55,17 @@ include BASE_PATH . "/controladora/db/conexion.php";
                             <td><?php echo $row["fechaIni"]; ?></td>
                             <td><?php echo $row["fechaFin"]; ?></td>
                             <td><?php echo $row["nombreMat"]; ?></td>
-                            <td>
-                                <?php if (
-                                    $row["om_data"] =
-                                    "" || ($row["om_data"] = null)
-                                ) {
-                                    echo "Sin cargar";
-                                } else {
-                                ?>
-                                    <button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button>
-                                <?php
-                                } ?>
-                            </td>
+                            <?php
+                            if ($row["om_data"] == null || $row["om_data"] == '') {
+                            ?>
+                                <td><button class="descargarpdf" style="color:red"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            } else {
+                            ?>
+                                <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            }
+                            ?>
                         </tr>
                     </table>
                 <?php }
@@ -83,8 +82,8 @@ include BASE_PATH . "/controladora/db/conexion.php";
     function descargarArchivo() {
 
         // API endpoint to fetch the PDF data
-        const id = '<?php echo $id; ?>'; //ID DE LA POSTULACION
-        const apiUrl = `/controladora/postulaciones/descargar_pdf.php?id=${id}`;
+        const id = '<?php echo $id; ?>';
+        const apiUrl = `/controladora/vacantes/orden_merito/descargar_orden_pdf.php?id=${id}`;
 
         // Fetch the PDF data using the API
         fetch(apiUrl)
@@ -106,7 +105,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
                 // Create a link to download the PDF
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobUrl;
-                downloadLink.download = 'cv.pdf'; // Specify the desired file name for download
+                downloadLink.download = 'orden_merito.pdf'; // Specify the desired file name for download
                 downloadLink.click();
                 // Clean up by revoking the Blob URL
                 URL.revokeObjectURL(blobUrl);
@@ -114,5 +113,6 @@ include BASE_PATH . "/controladora/db/conexion.php";
             .catch(error => console.error('Error fetching PDF:', error));
     }
 </script>
+
 
 </html>

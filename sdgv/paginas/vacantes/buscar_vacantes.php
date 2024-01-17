@@ -71,9 +71,10 @@ require_once "../../index.php";
                     <?php } else { ?>
                         <h2 class="text-center justify-content-center p-3">La materia ingresada no existe o bien no hay vacantes abiertas</h2>
                 <?php }
+                    mysqli_free_result($vResultado);
+                    mysqli_close($link);
                 }
-                mysqli_free_result($vResultado);
-                mysqli_close($link); ?>
+                ?>
         </div>
 
         <?php include BASE_PATH . "/componentes/footer/footer.html"; ?>
