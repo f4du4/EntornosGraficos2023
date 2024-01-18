@@ -1,17 +1,17 @@
+<?php
+
+$usuario = $_SESSION["email"];
+?>
 <nav class="row m-0 menunav d-flex-row container-fluid">
-  <ul
-    class="list-group-horizontal d-flex justify-content-around align-items-center m-0 p-2"
-  >
+  <ul class="list-group-horizontal d-flex justify-content-around align-items-center m-0 p-2">
     <li class="list-group-item menulink">
-      <a href="#">Perfil</a>
+      <a href="#"><?php echo $usuario ?></a>
       <ul class="dropdownmenu">
         <li>
           <a href="../../paginas/usuarios/perfil_usuario.php">Mi Perfil</a>
         </li>
         <li>
-          <a href="../../controladora/usuarios/cerrar_sesion.php"
-            >Cerrar Sesion</a
-          >
+          <a href="../../controladora/usuarios/cerrar_sesion.php">Cerrar Sesion</a>
         </li>
       </ul>
     </li>
@@ -19,24 +19,16 @@
       <a href="#">Vacantes</a>
       <ul class="dropdownmenu">
         <li>
-          <a href="../../paginas/vacantes/buscar_vacantes.php"
-            >Buscar vacantes</a
-          >
+          <a href="../../paginas/vacantes/buscar_vacantes.php">Buscar vacantes</a>
         </li>
         <li>
-          <a href="../../paginas/vacantes/vacantes_abiertas.php"
-            >Mostrar vacantes abiertas</a
-          >
+          <a href="../../paginas/vacantes/vacantes_abiertas.php">Mostrar vacantes abiertas</a>
         </li>
         <li>
-          <a href="../../paginas/postulaciones/cliente_postulaciones.php"
-            >Mis postulaciones</a
-          >
+          <a href="../../paginas/postulaciones/cliente_postulaciones.php">Mis postulaciones</a>
         </li>
         <li>
-          <a href="../../paginas/vacantes/vacantes_cerradas.php"
-            >Resultados concursos</a
-          >
+          <a href="../../paginas/vacantes/vacantes_cerradas.php">Resultados concursos</a>
         </li>
       </ul>
     </li>

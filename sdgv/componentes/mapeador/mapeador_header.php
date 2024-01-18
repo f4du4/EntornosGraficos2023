@@ -8,19 +8,19 @@ if (
 ) {
   if ($_SESSION["rol_id"] == 1) {
     include BASE_PATH . "/componentes/headers/cliente_header.php";
-    include BASE_PATH . "/componentes/menu/cliente_menu.html";
+    include BASE_PATH . "/componentes/menu/cliente_menu.php";
     $rol = "cliente";
   } elseif ($_SESSION["rol_id"] == 2) {
     include BASE_PATH . "/componentes/headers/jefecatedra_header.php";
-    include BASE_PATH . "/componentes/menu/jefecatedra_menu.html";
+    include BASE_PATH . "/componentes/menu/jefecatedra_menu.php";
     $rol = "jefe de catedra";
   } elseif ($_SESSION["rol_id"] == 3) {
     include BASE_PATH . "/componentes/headers/admin_header.php";
-    include BASE_PATH . "/componentes/menu/admin_menu.html";
+    include BASE_PATH . "/componentes/menu/admin_menu.php";
     $rol = "admin";
   } elseif ($_SESSION["rol_id"] == 4) {
     include BASE_PATH . "/componentes/headers/admin_header.php";
-    include BASE_PATH . "/componentes/menu/admin_menu.html";
+    include BASE_PATH . "/componentes/menu/admin_menu.php";
     $rol = "super admin";
   }
 } else {
