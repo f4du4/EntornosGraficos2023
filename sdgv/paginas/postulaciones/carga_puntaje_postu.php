@@ -25,11 +25,13 @@ require_once "../../index.php";
         <div class="row d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-3 titulo">Cargar Puntaje</h2>
             <?php if (isset($_POST["submitPostu"])) {
-                $idPostulacion = $_POST["idPostu"]; ?>
+                $idPostulacion = $_POST["idPostu"];
+                $idMateria = $_POST["idMateria"]; ?>
                 <form method="post" action="../../controladora/postulaciones/procesar_cargar_puntaje.php" class="d-flex flex-column iniciosesion">
                     <label for="">Puntaje:</label>
-                    <input type="number" name="puntos" placeholder="Cargue el puntaje"><br>
-                    <input type="hidden" name="idPos" readonly value="<?php echo $idPostulacion; ?>"><br>
+                    <input type="number" name="puntos" placeholder="Cargue el puntaje">
+                    <input type="hidden" name="idPos" readonly value="<?php echo $idPostulacion; ?>">
+                    <input type="hidden" name="idMateria" readonly value="<?php echo $idMateria; ?>">
                     <input type="submit" name="submitCarga" class="btn btn-success exito" value="Cargar"><br> <br>
                 </form>
             <?php

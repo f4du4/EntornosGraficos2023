@@ -99,7 +99,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
                                 </form>
                             </td>
                             <td>
-                                <form action="../../controladora/vacantes/eliminar_vacante.php" method="post">
+                                <form action="../../controladora/vacantes/baja_vacante.php" method="post">
                                     <input type="hidden" name="idvac" readonly value="<?php echo $row["id"]; ?>">
                                     <input type="submit" class="btn btn-danger exito" value="Eliminar" name="submiteliminar">
                                 </form>

@@ -54,28 +54,38 @@ require_once "../../index.php"; ?>
                             <td><?php echo $row["nombre"]; ?></td>
                             <td><?php echo $row["fechaFin"]; ?></td>
                             <td><?php echo $row["nombreMat"]; ?></td>
-                            <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            if ($row["om_data"] == null || $row["om_data"] == '') {
+                            ?>
+                                <td><button class="descargarpdf" style="color:red"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            } else {
+                            ?>
+                                <td><button class="descargarpdf" onclick="descargarArchivo(<?php echo $id; ?>)"><i class="bi bi-filetype-pdf"></i></button></td>
+                            <?php
+                            }
+                            ?>
                         </tr>
                     <?php
                     } ?>
                 </table>
                 <br> <br>
-            <?php } else { ?>
+            <?php
+            } else {
+            ?>
                 <h2>Actualmente no hay vacantes abiertas.</h2>
             <?php }
             mysqli_free_result($vResultado);
-            mysqli_close($links);
+            mysqli_close($link);
             ?>
         </div>
-
         <?php include BASE_PATH . "/componentes/footer/footer.html"; ?>
     </div>
 </body>
 <script>
-    function descargarArchivo() {
+    function descargarArchivo(id) {
 
         // API endpoint to fetch the PDF data
-        const id = '<?php echo $id; ?>';
         const apiUrl = `/controladora/vacantes/orden_merito/descargar_orden_pdf.php?id=${id}`;
 
         // Fetch the PDF data using the API

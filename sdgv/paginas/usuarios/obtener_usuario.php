@@ -61,7 +61,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
               <?php
               } else {
               ?>
-                <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                <td><button class="descargarpdf" onclick="descargarArchivo(<?php echo $id; ?>)"><i class="bi bi-filetype-pdf"></i></button></td>
               <?php
               }
               ?>
@@ -78,10 +78,10 @@ include BASE_PATH . "/controladora/db/conexion.php";
     </div>
 </body>
 <script>
-  function descargarArchivo() {
+  function descargarArchivo(id) {
 
     // API endpoint to fetch the PDF data
-    const id = '<?php echo $id; ?>'; //ID DE LA POSTULACION
+
     const apiUrl = `/controladora/postulaciones/descargar_pdf.php?id=${id}`;
 
     // Fetch the PDF data using the API

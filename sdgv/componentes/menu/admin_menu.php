@@ -20,6 +20,9 @@ $usuario = $_SESSION["email"];
         <li>
           <a href="../../paginas/usuarios/listar_usuarios.php">Gestion de Usuarios</a>
         </li>
+        <li>
+          <a href="../../paginas/usuarios/carga_usuario.php">Agregar nuevo usuario</a>
+        </li>
       </ul>
     </li>
     <li class="list-group-item menulink">

@@ -9,6 +9,5 @@ function generarContrasenaAleatoria($longitud = 12)
         $indice = rand(0, $caracteres_length);
         $contrasena .= $caracteres[$indice];
     }
-    echo $contrasena;
     return $contrasena;
 }

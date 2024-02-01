@@ -44,9 +44,9 @@ include BASE_PATH . "/controladora/db/conexion.php";
                     <tr class="datosTabla">
                         <td><?php echo $row["nombreMat"]; ?></td>
                         <td>
-                            <form action="../postulaciones/obtener_postulaciones.php" method="post">
-                                <input type="hidden" name="idMateria" readonly value="<?php echo $row["id"]; ?>">
-                                <input type="submit" class="btn btn-primary" value="Ver Postulaciones" name="submitpostu">
+                            <form action="../postulaciones/obtener_postulaciones.php" method="get">
+                                <input type="hidden" name="id" readonly value="<?php echo $row["id"]; ?>">
+                                <input type="submit" class="btn btn-primary" value="Ver Postulaciones">
                             </form>
                         </td>
 

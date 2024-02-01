@@ -1,5 +1,5 @@
 <?php
-$idVacante = $_POST['idvacante'];
+$idVacante = $_POST['idvac'];
 include BASE_PATH . "/controladora/db/conexion.php";
 //traigo todos los usuarios postulados
 $vQueryPostulantes = "SELECT usuarios.email, usuarios.nombre, usuarios.apellido, postulaciones.id FROM postulaciones INNER JOIN usuarios ON postulaciones.usuarios_id = usuarios.id 

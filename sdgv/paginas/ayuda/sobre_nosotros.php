@@ -75,7 +75,7 @@ session_start();
             $nombre = $_POST["nombre"];
             $email = $_POST["mail"];
             $comentario = $_POST["comentario"];
-            $destino = "faduadora77@gmail.com";
+            $destino = $_ENV["SENDER_EMAIL"];
             $asunto = "Consulta Sistema Gestion Vacantes";
             $mensaje = "Consulta de: {$nombre}, email: {$email}, Consulta: {$comentario}.";
             $headers = "From:noreply@example.com\r\n";

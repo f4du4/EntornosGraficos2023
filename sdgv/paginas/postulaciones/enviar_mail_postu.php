@@ -45,7 +45,11 @@ if (isset($_POST["submitEmail"])) {
     $RechazaQuery = "UPDATE postulaciones SET estado = 'Rechazada' WHERE postulaciones.vacantes_id = $idVacante AND postulaciones.id != $idPostulacion";
     mysqli_query($link, $RechazaQuery) or die(mysqli_error($link));
 }
+header("Location: ../vacantes/jefecatedra_notifica_ganador.php");
+die();
 mysqli_close($link);
+
+/*
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,4 +79,4 @@ mysqli_close($link);
     <?php include BASE_PATH . "/componentes/footer/footer.html"; ?>
 </body>
 
-</html>
+</html>*/

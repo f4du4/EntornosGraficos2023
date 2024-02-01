@@ -33,9 +33,9 @@ require_once "../../index.php";
                     $vMateria = $_POST["materia"];
                     if ($vMateria == "" || $vMateria == null) {
                         $vMateriaQuery =
-                            "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id";
+                            "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat, vacantes.om_data FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id";
                     } else {
-                        $vMateriaQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat FROM vacantes 
+                        $vMateriaQuery = "SELECT vacantes.id, vacantes.nombre, vacantes.fechaFin, materias.nombreMat,  vacantes.om_data FROM vacantes 
                 INNER JOIN materias ON vacantes.materia = materias.id WHERE materias.nombreMat LIKE '%$vMateria%'";
                     }
                     $vResultado = mysqli_query($link, $vMateriaQuery);
@@ -62,7 +62,17 @@ require_once "../../index.php";
                                     <td><?php echo $puesto; ?></td>
                                     <td><?php echo $fechaCierre; ?></td>
                                     <td><?php echo $materia; ?></td>
-                                    <td><button class="descargarpdf" onclick="descargarArchivo()"><i class="bi bi-filetype-pdf"></i></button></td>
+                                    <?php
+                                    if ($row["om_data"] == null || $row["om_data"] == '') {
+                                    ?>
+                                        <td><button class="descargarpdf" style="color:red"><i class="bi bi-filetype-pdf"></i></button></td>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <td><button class="descargarpdf" onclick="descargarArchivo(<?php echo $id; ?>)"><i class="bi bi-filetype-pdf"></i></button></td>
+                                    <?php
+                                    }
+                                    ?>
                                 </tr>
                             <?php
                             } ?>
@@ -81,10 +91,10 @@ require_once "../../index.php";
     </div>
 </body>
 <script>
-    function descargarArchivo() {
+    function descargarArchivo(id) {
 
         // API endpoint to fetch the PDF data
-        const id = '<?php echo $id; ?>';
+
         const apiUrl = `/controladora/vacantes/orden_merito/descargar_orden_pdf.php?id=${id}`;
 
         // Fetch the PDF data using the API

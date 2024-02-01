@@ -222,6 +222,16 @@ $URL_MAP = [
       "label" => "Mis materias",
     ],
   ],
+  "/sdgv/paginas/vacantes/jefecatedra_notifica_ganador.php" => [
+    [
+      "path" => "../../paginas/inicio/jefecatedra_inicio.php",
+      "label" => "Inicio",
+    ],
+    [
+      "path" => "../../paginas/vacantes/jefecatedra_notifica_ganador.php",
+      "label" => "Notificacion ganador vacante",
+    ],
+  ],
   "/sdgv/paginas/postulaciones/obtener_postulaciones.php" => [
     [
       "path" => "../../paginas/inicio/jefecatedra_inicio.php",
