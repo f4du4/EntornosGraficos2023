@@ -1,9 +1,6 @@
-<?php
-require_once "../../index.php"; ?>
-
 <header class="row d-flex-row">
   <div class="col-3 p-4 g-col-6 m-0">
-    <a href="https://gestiondevacantes23.000webhostapp.com/paginas/inicio/jefecatedra_inicio.php">
+    <a href="../../paginas/inicio/jefecatedra_inicio.php">
       <img src="../../imagenes/logo/pngwing.com.png" alt="Logo UTN" class="logo" />
     </a>
   </div>

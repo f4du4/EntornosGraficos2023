@@ -110,6 +110,20 @@ $URL_MAP = [
       "label" => "Editar Perfil",
     ],
   ],
+  "/sdgv/paginas/usuarios/error_editar_perfil_usuario.php" => [
+    [
+      "path" => "../../paginas/inicio/cliente_inicio.php",
+      "label" => "Inicio",
+    ],
+    [
+      "path" => "../../paginas/usuarios/perfil_usuario.php",
+      "label" => "Mi Perfil",
+    ],
+    [
+      "path" => "../../paginas/usuarios/editar_mi_perfil.php",
+      "label" => "Editar Perfil",
+    ],
+  ],
   "/sdgv/paginas/postulaciones/cliente_postulaciones.php" => [
     [
       "path" => "../../paginas/inicio/cliente_inicio.php",
@@ -199,6 +213,20 @@ $URL_MAP = [
     ],
   ],
   "/sdgv/paginas/usuarios/editar_mi_perfil.php" => [
+    [
+      "path" => "../../paginas/inicio/jefecatedra_inicio.php",
+      "label" => "Inicio",
+    ],
+    [
+      "path" => "../../paginas/usuarios/perfil_usuario.php",
+      "label" => "Mi Perfil",
+    ],
+    [
+      "path" => "../../paginas/usuarios/editar_mi_perfil.php",
+      "label" => "Editar Perfil",
+    ],
+  ],
+  "/sdgv/paginas/usuarios/error_editar_perfil_usuario.php" => [
     [
       "path" => "../../paginas/inicio/jefecatedra_inicio.php",
       "label" => "Inicio",
@@ -327,6 +355,20 @@ $URL_MAP = [
     ],
   ],
   "/sdgv/paginas/usuarios/editar_mi_perfil.php" => [
+    [
+      "path" => "../../paginas/inicio/admin_inicio.php",
+      "label" => "Inicio",
+    ],
+    [
+      "path" => "../../paginas/usuarios/perfil_usuario.php",
+      "label" => "Mi Perfil",
+    ],
+    [
+      "path" => "../../paginas/usuarios/editar_mi_perfil.php",
+      "label" => "Editar Perfil",
+    ],
+  ],
+  "/sdgv/paginas/usuarios/error_editar_perfil_usuario.php" => [
     [
       "path" => "../../paginas/inicio/admin_inicio.php",
       "label" => "Inicio",
