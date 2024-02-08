@@ -134,6 +134,16 @@ $URL_MAP = [
       "label" => "Mis Postulaciones",
     ],
   ],
+  "/sdgv/paginas/postulaciones/error_carga_pdf.php" => [
+    [
+      "path" => "../../paginas/inicio/cliente_inicio.php",
+      "label" => "Inicio",
+    ],
+    [
+      "path" => "../../paginas/postulaciones/cliente_postulaciones.php",
+      "label" => "Mis Postulaciones",
+    ],
+  ],
   "/sdgv/paginas/vacantes/buscar_vacantes.php" => [
     [
       "path" => "../../paginas/inicio/cliente_inicio.php",

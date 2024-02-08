@@ -25,6 +25,7 @@ session_start();
         <div class="row d-flex d-flex-row justify-content-center pt-2">
             <h2 class="text-center p-4 pt-5 titulo">Listado de vacantes abiertas</h2>
             <?php
+            $userId = $_SESSION['id'];
             date_default_timezone_set("America/Argentina/Buenos_Aires"); //defino la zona horaria
             $dia = date("d"); //j es los dias sin el cero adelante
             $mes = date("m"); //n es los meses sin el cero adelante
@@ -48,11 +49,21 @@ session_start();
             mysqli_free_result($resultadoTotal);
             $totalPaginas = ceil($rowsTotales / $limite);
 
+            $misPostulacionesQuery = "SELECT vacantes.id from postulaciones inner join vacantes on postulaciones.vacantes_id = vacantes.id where postulaciones.usuarios_id = '$userId'";
+            $vResultadoMisPostulaciones = mysqli_query($link, $misPostulacionesQuery);
             $vFechaQuery = "SELECT vacantes.fechaFin, vacantes.fechaIni, vacantes.id, vacantes.nombre,
                 materias.nombreMat, vacantes.om_data FROM vacantes INNER JOIN materias ON vacantes.materia = materias.id
                 WHERE '$hoy' BETWEEN vacantes.fechaIni AND vacantes.fechaFin LIMIT $inicio, $limite";
             $vResultado = mysqli_query($link, $vFechaQuery);
             $num_rows = mysqli_num_rows($vResultado);
+
+            $vacantesYaPostuladas = array();
+
+            if ($vResultadoMisPostulaciones) {
+                while ($row = $vResultadoMisPostulaciones->fetch_array()) {
+                    $vacantesYaPostuladas[$row['id']] = true;
+                }
+            }
 
             if ($num_rows > 0 && $rowsTotales > 0) { ?>
                 <br> <br>
@@ -85,7 +96,10 @@ session_start();
                             <td>
                                 <form action="../postulaciones/postularse.php" method="post">
                                     <input type="hidden" name="idvacante" readonly value="<?php echo $row["id"]; ?>">
-                                    <input type="submit" class="btn btn-success exito" value="Postular" name="submitvacante">
+                                    <?php
+                                    $postulacionDeshabilitada = isset($vacantesYaPostuladas[$id]) ? 'disabled' : '';
+                                    $label = $postulacionDeshabilitada != '' ? 'Postulado' : 'Postular';
+                                    echo '<input type="submit" class="btn btn-success exito px-2" value="' . $label . '" name="submitvacante"' . $postulacionDeshabilitada . '>';                                    ?>
                                 </form>
                             </td>
                         </tr>
@@ -95,7 +109,6 @@ session_start();
                 <br> <br>
 
                 <?php
-                // Generate pagination links (show only a few buttons)
                 echo '<ul class="pagination justify-content-center lead">';
                 if ($num_pagina > 1) {
                     echo '<li class="page-item"><a class="page-link item-paginacion" href="./vacantes_abiertas.php?page=' .
@@ -110,7 +123,6 @@ session_start();
                     }
                 }
 
-                // Show current page and the next two pages
                 for (
                     $i = max(1, $num_pagina - 1);
                     $i <= min($num_pagina + 2, $totalPaginas);
@@ -144,6 +156,7 @@ session_start();
             } else { ?>
                 <h2>Actualmente no hay vacantes abiertas.</h2>
             <?php }
+            mysqli_free_result($vResultadoMisPostulaciones);
             mysqli_free_result($vResultado);
             mysqli_close($link);
             ?>
@@ -155,33 +168,25 @@ session_start();
 <script>
     function descargarArchivo(id) {
 
-        // API endpoint to fetch the PDF data
+        const apiUrl = `../../controladora/vacantes/orden_merito/descargar_orden_pdf.php?id=${id}`;
 
-        const apiUrl = `/controladora/vacantes/orden_merito/descargar_orden_pdf.php?id=${id}`;
-
-        // Fetch the PDF data using the API
         fetch(apiUrl)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                // Decode the Base64 data to a binary PDF
                 const pdfData = atob(data.pdfData);
 
-                // Create a Blob object from the binary PDF data
                 const blob = new Blob([new Uint8Array([...pdfData].map(char => char.charCodeAt(0)))], {
                     type: 'application/pdf'
                 });
 
-                // Create a temporary URL for the Blob
                 const blobUrl = URL.createObjectURL(blob);
 
-                // Create a link to download the PDF
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobUrl;
-                downloadLink.download = 'orden_merito.pdf'; // Specify the desired file name for download
+                downloadLink.download = 'orden_merito.pdf';
                 downloadLink.click();
-                // Clean up by revoking the Blob URL
                 URL.revokeObjectURL(blobUrl);
             })
             .catch(error => console.error('Error fetching PDF:', error));

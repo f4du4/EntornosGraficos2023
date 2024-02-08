@@ -82,7 +82,7 @@ include BASE_PATH . "/controladora/db/conexion.php";
 
     // API endpoint to fetch the PDF data
 
-    const apiUrl = `/controladora/postulaciones/descargar_pdf.php?id=${id}`;
+    const apiUrl = `../../controladora/postulaciones/descargar_pdf.php?id=${id}`;
 
     // Fetch the PDF data using the API
     fetch(apiUrl)
